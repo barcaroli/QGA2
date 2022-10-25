@@ -38,6 +38,8 @@
 #' @param repair name of the repair function (default is NULL)
 #' @param prepare_data name of the data preparation function (default is NULL)
 #' 
+#' @export
+#' 
 #' @return A numeric vector giving the best solution obtained by the QGA
 #' 
 #' @examples
