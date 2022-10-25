@@ -8,7 +8,6 @@ Authors@R: c(person("Giulio", "Barcaroli", role = c("aut", "cre"),
                      email = "gbarcaroli@gmail.com"),
               person("Marco", "Ballin", role = "aut",
                      email = "marco.ballin@istat.it"))
-              )
 Maintainer: Giulio Barcaroli <gbarcaroli@gmail.com>
 Description: 
 License: GPL (>= 2)
