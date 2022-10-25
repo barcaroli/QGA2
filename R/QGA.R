@@ -1,6 +1,6 @@
 #' Quantum Genetic Algorithm
 #'
-#' @description Main function to execute a Quantum Genetic Algorithm
+#' @description 
 #' 
 #' Main function to execute a Quantum Genetic Algorithm
 #' 
