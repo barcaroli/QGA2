@@ -304,6 +304,10 @@ QGA <- function(popsize = 20,
   # Show_population()
   chromosome <- measure()
   a <- eval_fitness(chromosome,
+                    popsize,
+                    Genome,
+                    Genome_el,
+                    nvalues_sol,
                     generation,
                     eval_func_inputs)
   fitness <- a$fitness
@@ -333,6 +337,10 @@ QGA <- function(popsize = 20,
     chromosome <- measure()
     chromosome <- repair(chromosome)
     a <- eval_fitness(chromosome,
+                      popsize,
+                      Genome,
+                      Genome_el,
+                      nvalues_sol,
                       generation,
                       eval_func_inputs)
     fitness <- a$fitness

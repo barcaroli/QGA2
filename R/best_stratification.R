@@ -15,16 +15,29 @@
 #' Requires package SamplingStrata to execute functions aggrStrata and Bethel
 #' 
 #' @param chromosome the current set of the solutions to be evaluated
+#' @param popsize the number of generated solutions (population) to be evaluated at each iteration
+#' (default is 20)
+#' @param Genome the length of the genome, i.e. the elements of the chromosome representing an 
+#' individual in the population 
+#' @param Genome_el the length of the single elements in the elements, where each position 
+#' represents a qubit
+#' @param nvalues_sol the number of possible values contained in each element of the solution 
+#' (it must be nvalues_sol <= 2^Genome_el) 
 #' @param generation index of the current generation
 #' @param eval_func_inputs specific inputs for best stratification 
-#' (list with sampling frame, precision constraints and number of strata) 
+#' (list with sampling frame and precision constraints) 
 #' 
 #' @export
 #'  
 #' 
 best_stratification <- function(chromosome,
+                                popsize,
+                                Genome,
+                                Genome_el,
+                                nvalues_sol,
                                 generation,
                                 eval_func_inputs) {
+  nstrat <- nvalues_sol
   repair <- function(chromosome) {
     diff = 2^Genome_el - nstrat
     for (i in c(1:popsize)) {
@@ -54,7 +67,7 @@ best_stratification <- function(chromosome,
   }
   frame <- eval_func_inputs$frame
   cv <- eval_func_inputs$cv
-  nstrat <- eval_func_inputs$nstrat
+  fitness <- array(0.0, c(1, popsize))
   fitness_total <- 0
   sum_sqr <- 0
   fitness_average <- -99999999
