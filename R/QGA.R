@@ -57,7 +57,7 @@ QGA <- function(popsize = 20,
                 mutation_rate_max = 1/(Genome+1),
                 mutation_rate_min = 1/(Genome+1),
                 mutation_flag = TRUE,
-                eval_function,
+                eval_fitness,
                 eval_func_inputs) {
   
   # Check
