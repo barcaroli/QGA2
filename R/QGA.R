@@ -303,7 +303,9 @@ QGA <- function(popsize = 20,
   q_alphabeta <- generate_pop()
   # Show_population()
   chromosome <- measure()
-  a <- eval_fitness(generation)
+  a <- eval_fitness(chromosome,
+                    generation,
+                    eval_func_inputs)
   fitness <- a$fitness
   fitness_max <- a$fitness_max
   fitness_average <- a$fitness_average
@@ -330,7 +332,9 @@ QGA <- function(popsize = 20,
     generation <- generation + 1
     chromosome <- measure()
     chromosome <- repair(chromosome)
-    a <- eval_fitness(generation)
+    a <- eval_fitness(chromosome,
+                      generation,
+                      eval_func_inputs)
     fitness <- a$fitness
     fitness_max <- a$fitness_max
     fitness_average <- a$fitness_average
