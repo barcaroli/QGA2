@@ -73,3 +73,8 @@ two more functions that need to be developed or personalized:
 1. eval_fitness
 2. repair_function
 }
+\examples{
+".\examples\IrisOptimization.R"
+
+
+}
