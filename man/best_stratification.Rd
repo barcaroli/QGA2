@@ -4,10 +4,33 @@
 \alias{best_stratification}
 \title{Best stratification fitness evaluation function}
 \usage{
-best_stratification(chromosome, generation, eval_func_inputs)
+best_stratification(
+  chromosome,
+  best_chromosome,
+  popsize,
+  Genome,
+  Genome_el,
+  nvalues_sol,
+  generation,
+  eval_func_inputs
+)
 }
 \arguments{
 \item{chromosome}{the current set of the solutions to be evaluated}
+
+\item{best_chromosome}{the vector of best chromosomes found so far}
+
+\item{popsize}{the number of generated solutions (population) to be evaluated at each iteration
+(default is 20)}
+
+\item{Genome}{the length of the genome, i.e. the elements of the chromosome representing an 
+individual in the population}
+
+\item{Genome_el}{the length of the single elements in the elements, where each position 
+represents a qubit}
+
+\item{nvalues_sol}{the number of possible values contained in each element of the solution 
+(it must be nvalues_sol <= 2^Genome_el)}
 
 \item{generation}{index of the current generation}
 

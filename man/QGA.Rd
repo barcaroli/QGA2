@@ -7,7 +7,7 @@
 QGA(
   popsize = 20,
   generation_max = 200,
-  nbitsol,
+  nvalues_sol,
   Genome,
   Genome_el,
   thetamax = 3.1415926535 * 0.05,
@@ -17,7 +17,7 @@ QGA(
   mutation_rate_max = 1/(Genome + 1),
   mutation_rate_min = 1/(Genome + 1),
   mutation_flag = TRUE,
-  eval_function,
+  eval_fitness,
   eval_func_inputs
 )
 }
@@ -28,8 +28,8 @@ QGA(
 \item{generation_max}{the number of iterations to be performed
 (default is 200)}
 
-\item{nbitsol}{the number of possible values contained in each element of the solution 
-(it must be nbitsol <= 2^Genome_el)}
+\item{nvalues_sol}{the number of possible values contained in each element of the solution 
+(it must be nvalues_sol <= 2^Genome_el)}
 
 \item{Genome}{the length of the genome, i.e. the elements of the chromosome representing an 
 individual in the population}
@@ -57,9 +57,9 @@ to each element of the chromosome (default is 1/(Genome+1))}
 
 \item{mutation_flag}{flag indicating if the mutation gate is to be applied or not (default is TRUE)}
 
-\item{eval_func_inputs}{specific inputs required by the eval_fitness function}
-
 \item{eval_fitness}{name of the function that will be used to evaluate the fitness of each solution}
+
+\item{eval_func_inputs}{specific inputs required by the eval_fitness function}
 }
 \value{
 A numeric vector giving the best solution obtained by the QGA
