@@ -35,8 +35,7 @@
 #' to each element of the chromosome (default is 1/(Genome+1))
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
-#' @param repair name of the repair function (default is NULL)
-#' @param prepare_data name of the data preparation function (default is NULL)
+#' @param eval_func_inputs specific inputs required by the eval_fitness function
 #' 
 #' @export
 #' 
@@ -58,9 +57,8 @@ QGA <- function(popsize = 20,
                 mutation_rate_max = 1/(Genome+1),
                 mutation_rate_min = 1/(Genome+1),
                 mutation_flag = TRUE,
-                eval_function = eval_fitness,
-                repair_function = NULL,
-                prepare_data = NULL) {
+                eval_function,
+                eval_func_inputs) {
   
   # Check
   if (nstrat > 2^Genome_el) stop("Values of nstrat and Genome_el not compatible")

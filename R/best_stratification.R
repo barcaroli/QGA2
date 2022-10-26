@@ -1,7 +1,27 @@
-#-------------------
-# FITNESS EVALUATION                      
-#-------------------
-eval_fitness <- function(generation) {
+#' Best stratification fitness evaluation function
+#'
+#' @description 
+#' 
+#' Fitness evaluation to be used for the optimization of a sampling frame stratification
+#' 
+#' @details
+#' 
+#' This function is the one that perform the evaluation of the fitness in the case of 
+#' the optimization of a sampling frame stratification.
+#' The function takes the set of solution considered at the k-th iteration of the Quantum
+#' Genetic Algorithm, and for each of them determines the minimum sample size required to
+#' be compliant with precision constraints on the target variables.
+#' 
+#' @param chromosome the current set of the solutions to be evaluated
+#' @param frame the sampling frame
+#' @param cv the set of precision constraints
+#' 
+#' @export
+#'  
+#' 
+best_stratification <- function(chromosome,
+                                frame,
+                                cv) {
   fitness_total <- 0
   sum_sqr <- 0
   fitness_average <- -999999
@@ -16,12 +36,6 @@ eval_fitness <- function(generation) {
       }
     }
     solution <- solution + 1
-    table(solution)
-    # strata <- aggrStrata(strata = atomic_strata, 
-    #                      nvar = nvar, 
-    #                      vett = solution, 
-    #                      censiti = 0,
-    #                      dominio = 1)
     strata = aggrStrata2(dataset=frame,
                          model=NULL,
                          vett=solution,
