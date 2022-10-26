@@ -19,8 +19,8 @@
 #' individual in the population 
 #' @param Genome_el the length of the single elements in the elements, where each position 
 #' represents a qubit
-#' @param nbitsol the number of possible values contained in each element of the solution 
-#' (it must be nbitsol <= 2^Genome_el) 
+#' @param nvalues_sol the number of possible values contained in each element of the solution 
+#' (it must be nvalues_sol <= 2^Genome_el) 
 #' @param thetamax the maximum angle (expressed in radiants) to be used when applyin the rotation gate 
 #' (default is pi * 0.05, where pi = 3.1415926535)
 #' @param thetamin the minimum angle (expressed in radiants) to be used when applyin the rotation gate 
@@ -47,7 +47,7 @@
 
 QGA <- function(popsize = 20,  
                 generation_max = 200,
-                nbitsol,
+                nvalues_sol,
                 Genome,
                 Genome_el,
                 thetamax = 3.1415926535 * 0.05,
@@ -61,7 +61,7 @@ QGA <- function(popsize = 20,
                 eval_func_inputs) {
   
   # Check
-  if (nstrat > 2^Genome_el) stop("Values of nstrat and Genome_el not compatible")
+  if (nvalues_sol > 2^Genome_el) stop("Values of nvalues_sol and Genome_el not compatible")
   genomeLength <- Genome * Genome_el 
   
   
@@ -290,9 +290,7 @@ QGA <- function(popsize = 20,
   #----------
   # EXECUTION                   
   #----------
-  
-  prepare_data()
-  
+
   res <- NULL
   res$generation <- c(1:(generation_max + 1))
   res$fitness_average <- rep(0, (generation_max + 1))
