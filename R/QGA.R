@@ -341,7 +341,7 @@ QGA <- function(popsize = 20,
   cat("\n***", generation, ",", fitness_average, ",", fitness_max)
   
   while (generation <= generation_max) {
-    cat("\n Iteration: ",generation)
+    # cat("\n Iteration: ",generation)
     theta <- thetamax - ((thetamax - thetamin) / generation_max) * generation
     if (theta < 0) theta <- 0
     q_alphabeta <- rotation(chromosome,
