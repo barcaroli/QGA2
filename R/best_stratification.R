@@ -12,19 +12,49 @@
 #' Genetic Algorithm, and for each of them determines the minimum sample size required to
 #' be compliant with precision constraints on the target variables.
 #' 
+#' Requires package SamplingStrata to execute functions aggrStrata and Bethel
+#' 
 #' @param chromosome the current set of the solutions to be evaluated
-#' @param frame the sampling frame
-#' @param cv the set of precision constraints
+#' @param generation index of the current generation
+#' @param eval_func_inputs specific inputs for best stratification 
+#' (list with sampling frame and precision constraints) 
 #' 
 #' @export
 #'  
 #' 
 best_stratification <- function(chromosome,
-                                frame,
-                                cv) {
+                                generation,
+                                eval_func_inputs) {
+  repair <- function(chromosome) {
+    diff = 2^Genome_el - nstrat
+    for (i in c(1:popsize)) {
+      solution1 <- array(chromosome[i,],c(Genome_el,Genome))
+      solution <- c(rep(0,Genome))
+      for (x in c(1:Genome)) {
+        for (y in c(1:Genome_el)) {
+          solution[x] <- solution[x] + solution1[y,x]*2^(Genome_el - y) 
+        }
+      }
+      solution <- solution + 1
+      table(solution)
+      sum(table(solution))
+      t <- as.numeric(table(solution))
+      length(t)
+      if (length(t) > nstrat) { 
+        solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] <- solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] - diff
+      }
+      a = array(c(1:genomeLength),c(Genome_el,Genome))
+      for (x in c(1:Genome)) {
+        y1 = a[1,x]
+        y2 = a[Genome_el,x]
+        chromosome[i,c(y1:y2)] <- as.binary(solution[x]-1,n=Genome_el)
+      }
+    }  
+    return(chromosome)
+  }
   fitness_total <- 0
   sum_sqr <- 0
-  fitness_average <- -999999
+  fitness_average <- -99999999
   variance <- 0
   if (nstrat < 2^Genome_el) chromosome <- repair(chromosome)
   for (i in c(1:popsize)) {
@@ -36,11 +66,11 @@ best_stratification <- function(chromosome,
       }
     }
     solution <- solution + 1
-    strata = aggrStrata2(dataset=frame,
+    strata = SamplingStrata::aggrStrata2(dataset=frame,
                          model=NULL,
                          vett=solution,
                          dominio=1)
-    fitness[i] <- -sum(bethel(strata, cv, realAllocation = TRUE))
+    fitness[i] <- -sum(SamplingStrata::bethel(strata, cv, realAllocation = TRUE))
     fitness_total <- fitness_total + fitness[i]
   }
   fitness_max <- -999999
