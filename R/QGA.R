@@ -304,6 +304,7 @@ QGA <- function(popsize = 20,
   # Show_population()
   chromosome <- measure()
   a <- eval_fitness(chromosome,
+                    best_chromosome,
                     popsize,
                     Genome,
                     Genome_el,
@@ -335,8 +336,9 @@ QGA <- function(popsize = 20,
     if (mutation_flag == TRUE) q_alphabeta <- mutation(pop_mutation_rate, mutation_rate)
     generation <- generation + 1
     chromosome <- measure()
-    chromosome <- repair(chromosome)
+    # chromosome <- repair(chromosome)
     a <- eval_fitness(chromosome,
+                      best_chromosome,
                       popsize,
                       Genome,
                       Genome_el,

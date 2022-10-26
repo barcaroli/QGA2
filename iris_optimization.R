@@ -42,12 +42,4 @@ QGA(
   eval_func_inputs = list(frame, cv)
 )
 
-best_stratification <- function(chromosome,
-                                popsize,
-                                Genome,
-                                Genome_el,
-                                nvalues_sol,
-                                generation,
-                                eval_func_inputs,
-                                fitness)
 

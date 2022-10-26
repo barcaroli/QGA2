@@ -15,6 +15,7 @@
 #' Requires package SamplingStrata to execute functions aggrStrata and Bethel
 #' 
 #' @param chromosome the current set of the solutions to be evaluated
+#' @param best_chromosome the vector of best chromosomes found so far
 #' @param popsize the number of generated solutions (population) to be evaluated at each iteration
 #' (default is 20)
 #' @param Genome the length of the genome, i.e. the elements of the chromosome representing an 
@@ -31,6 +32,7 @@
 #'  
 #' 
 best_stratification <- function(chromosome,
+                                best_chromosome,
                                 popsize,
                                 Genome,
                                 Genome_el,
