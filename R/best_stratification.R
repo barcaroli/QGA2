@@ -17,7 +17,7 @@
 #' @param chromosome the current set of the solutions to be evaluated
 #' @param generation index of the current generation
 #' @param eval_func_inputs specific inputs for best stratification 
-#' (list with sampling frame and precision constraints) 
+#' (list with sampling frame, precision constraints and number of strata) 
 #' 
 #' @export
 #'  
@@ -52,11 +52,14 @@ best_stratification <- function(chromosome,
     }  
     return(chromosome)
   }
+  frame <- eval_func_inputs$frame
+  cv <- eval_func_inputs$cv
+  nstrat <- eval_func_inputs$nstrat
   fitness_total <- 0
   sum_sqr <- 0
   fitness_average <- -99999999
   variance <- 0
-  if (nstrat < 2^Genome_el) chromosome <- repair(chromosome)
+  # if (nstrat < 2^Genome_el) chromosome <- repair(chromosome)
   for (i in c(1:popsize)) {
     solution1 <- array(chromosome[i,],c(Genome_el,Genome))
     solution <- c(rep(0,Genome))
