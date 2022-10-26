@@ -125,7 +125,16 @@ QGA <- function(popsize = 20,
   # ROTATION                   
   #--------------
   
-  rotation <- function(fitness, theta) {
+  rotation <- function(chromosome,
+                       best_chromosome,
+                       generation,
+                       genome_length,
+                       solution_best,
+                       q_alphabeta,
+                       work_q_alphabeta,
+                       popsize,
+                       fitness, 
+                       theta) {
     rot <- array(0, c(2, 2))
     for (i in c(1:popsize)) {
       if (sum(chromosome[i, ] != solution_best) != 0) {
@@ -323,19 +332,28 @@ QGA <- function(popsize = 20,
   res$fitness_average[generation] <- fitness_average
   res$fitness_best[generation] <- fitness_best
   plot_Output(res[c(1:generation), ])
-  cat("\n***", generation, ",", fitness_average, ",", fitness_max,",",length(unique(solution_best)))
+  cat("\n***", generation, ",", fitness_average, ",", fitness_max)
   
   while (generation <= generation_max) {
     cat("\n Iteration: ",generation)
     theta <- thetamax - ((thetamax - thetamin) / generation_max) * generation
     if (theta < 0) theta <- 0
-    q_alphabeta <- rotation(fitness, theta)
+    q_alphabeta <- rotation(chromosome,
+                            best_chromosome,
+                            generation,
+                            genome_length,
+                            solution_best,
+                            q_alphabeta,
+                            work_q_alphabeta,
+                            popsize,
+                            fitness, 
+                            theta)
     # pop_mutation_rate <- pop_mutation_rate_min + ((pop_mutation_rate_max - pop_mutation_rate_min) / generation_max) * generation
     # mutation_rate <- mutation_rate_min + ((mutation_rate_max - mutation_rate_min) / generation_max) * generation
+    generation <- generation + 1
     pop_mutation_rate = pop_mutation_rate_max - ((pop_mutation_rate_max - pop_mutation_rate_min) / generation_max) * generation
     mutation_rate = mutation_rate_max - ((mutation_rate_max - mutation_rate_min) / generation_max) * generation
     if (mutation_flag == TRUE) q_alphabeta <- mutation(pop_mutation_rate, mutation_rate)
-    generation <- generation + 1
     chromosome <- measure()
     # chromosome <- repair(chromosome)
     a <- eval_fitness(chromosome,
