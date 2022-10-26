@@ -65,8 +65,8 @@ best_stratification <- function(chromosome,
     }  
     return(chromosome)
   }
-  frame <- eval_func_inputs$frame
-  cv <- eval_func_inputs$cv
+  frame <- eval_func_inputs[[1]]
+  cv <- eval_func_inputs[[2]]
   fitness <- array(0.0, c(1, popsize))
   fitness_total <- 0
   sum_sqr <- 0

@@ -39,7 +39,15 @@ QGA(
   mutation_rate_min = 1/(Genome + 1),
   mutation_flag = TRUE,
   eval_fitness = best_stratification,
-  eval_func_inputs = list(frame, cv, nstrat)
+  eval_func_inputs = list(frame, cv)
 )
 
+best_stratification <- function(chromosome,
+                                popsize,
+                                Genome,
+                                Genome_el,
+                                nvalues_sol,
+                                generation,
+                                eval_func_inputs,
+                                fitness)
 
