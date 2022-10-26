@@ -241,7 +241,13 @@ QGA <- function(popsize = 20,
   # MUTATION                   
   #----------
   
-  mutation <- function(pop_mutation_rate, mutation_rate) {
+  mutation <- function(pop_mutation_rate, 
+                       mutation_rate,
+                       popsize,
+                       chromosome,
+                       solution_best,
+                       q_alphabeta,
+                       work_q_alphabeta) {
     work_q_alphabeta <- q_alphabeta
     for (i in c(1:popsize)) {
       if (sum(chromosome[i, ] != solution_best) != 0) {
@@ -353,7 +359,15 @@ QGA <- function(popsize = 20,
     generation <- generation + 1
     pop_mutation_rate = pop_mutation_rate_max - ((pop_mutation_rate_max - pop_mutation_rate_min) / generation_max) * generation
     mutation_rate = mutation_rate_max - ((mutation_rate_max - mutation_rate_min) / generation_max) * generation
-    if (mutation_flag == TRUE) q_alphabeta <- mutation(pop_mutation_rate, mutation_rate)
+    if (mutation_flag == TRUE) {
+      q_alphabeta <- mutation(pop_mutation_rate, 
+                              mutation_rate,
+                              popsize,
+                              chromosome,
+                              solution_best,
+                              q_alphabeta,
+                              work_q_alphabeta)      
+    }
     chromosome <- measure()
     # chromosome <- repair(chromosome)
     a <- eval_fitness(chromosome,
