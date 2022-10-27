@@ -11,10 +11,11 @@ Authors@R: c(person("Giulio", "Barcaroli", role = c("aut", "cre"),
 Maintainer: Giulio Barcaroli <gbarcaroli@gmail.com>
 Description: 
 License: GPL (>= 2)
+Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0), binaryLogic
+Suggests: SamplingStrata
 NeedsCompilation: no
 Packaged: 
-Suggests: 
 VignetteBuilder: knitr
 RoxygenNote: 7.2.1

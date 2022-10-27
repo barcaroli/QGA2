@@ -39,6 +39,7 @@ best_stratification <- function(chromosome,
                                 nvalues_sol,
                                 generation,
                                 eval_func_inputs) {
+  require(SamplingStrata)
   nstrat <- nvalues_sol
   frame <- eval_func_inputs[[1]]
   cv <- eval_func_inputs[[2]]

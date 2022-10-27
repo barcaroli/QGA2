@@ -15,15 +15,11 @@
 #' (default is 20)
 #' @param generation_max the number of iterations to be performed
 #' (default is 200)
-#' @param Genome the length of the genome, i.e. the elements of the chromosome representing an 
-#' individual in the population 
-#' @param Genome_el the length of the single elements in the elements, where each position 
-#' represents a qubit
-#' @param nvalues_sol the number of possible values contained in each element of the solution 
-#' (it must be nvalues_sol <= 2^Genome_el) 
-#' @param thetamax the maximum angle (expressed in radiants) to be used when applyin the rotation gate 
+#' @param Genome the length of the genome (or chromosome), representing a possible solution 
+#' #' #' @param nvalues_sol the number of possible integer values contained in each element of the solution 
+#' #' @param thetamax the maximum angle (expressed in radiants) to be used when applying the rotation gate 
 #' (default is pi * 0.05, where pi = 3.1415926535)
-#' @param thetamin the minimum angle (expressed in radiants) to be used when applyin the rotation gate 
+#' @param thetamin the minimum angle (expressed in radiants) to be used when applying the rotation gate 
 #' (default is pi * 0.025, where pi = 3.1415926535)
 #' @param pop_mutation_rate_max maximum mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each individual in the population (default is 1/(popsize+1))
@@ -126,33 +122,19 @@ QGA <- function(popsize = 20,
                 eval_fitness,
                 eval_func_inputs) {
   
-  # Check
+  # Calculate the number of (qu)bits necessary for each element in the genome/chromosome
   n = 0
   while (nvalues_sol > 2^n) {
     n = n+1
   }
-    
-  if (Genome_el < n) {
-    cat("\n To handle ",nvalues_sol," different values in the solution")
-    cat("\n you need to set Genome_el equal to ", n)
-    cat("\n current nvalues_sol (",nvalues_sol,") is too high or current Genome_el (",Genome_el,") too low ")
-    cat("\n")
-    stop("\n Current values of nvalues_sol and Genome_el are not compatible")
-  }
-    
-  if (Genome_el > n) {
-    cat("\n To handle ",nvalues_sol," different values in the solution")
-    cat("\n you need to set Genome_el equal to ", n)
-    cat("\n current nvalues_sol (",nvalues_sol,") is too low or current Genome_el (",Genome_el,") too high ")
-    cat("\n")
-    stop("\n Current values of nvalues_sol and Genome_el are not compatible")
-  }
+   
+  Genome_el = n 
 
   genomeLength <- Genome * Genome_el 
   
   
   #---------------------
-  # WORK VARIABLES                                  
+  #  WORKING VARIABLES                                  
   #---------------------
   
   qubit_0 <- array(c(1, 0), c(2, 1))
@@ -179,6 +161,7 @@ QGA <- function(popsize = 20,
   generate_pop <- function() {
     for (i in c(1:popsize)) {
       for (j in c(1:genomeLength)) {
+        set.seed(1234)
         theta <- runif(1) * 360
         theta <- pi*theta
         rot[1, 1] <- cos(theta)
@@ -198,6 +181,7 @@ QGA <- function(popsize = 20,
   measure <- function() {
     for (i in (1:popsize)) {
       for (j in (1:genomeLength)) {
+        set.seed(1234)
         p_alpha <- runif(1)
         if (p_alpha <= 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 0
         if (p_alpha > 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 1

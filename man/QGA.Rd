@@ -28,19 +28,12 @@ QGA(
 \item{generation_max}{the number of iterations to be performed
 (default is 200)}
 
-\item{nvalues_sol}{the number of possible values contained in each element of the solution 
-(it must be nvalues_sol <= 2^Genome_el)}
-
-\item{Genome}{the length of the genome, i.e. the elements of the chromosome representing an 
-individual in the population}
-
-\item{Genome_el}{the length of the single elements in the elements, where each position 
-represents a qubit}
-
-\item{thetamax}{the maximum angle (expressed in radiants) to be used when applyin the rotation gate 
+\item{Genome}{the length of the genome (or chromosome), representing a possible solution 
+#' #' @param nvalues_sol the number of possible integer values contained in each element of the solution 
+#' @param thetamax the maximum angle (expressed in radiants) to be used when applying the rotation gate 
 (default is pi * 0.05, where pi = 3.1415926535)}
 
-\item{thetamin}{the minimum angle (expressed in radiants) to be used when applyin the rotation gate 
+\item{thetamin}{the minimum angle (expressed in radiants) to be used when applying the rotation gate 
 (default is pi * 0.025, where pi = 3.1415926535)}
 
 \item{pop_mutation_rate_max}{maximum mutation rate to be used when applying the X-Pauli gate, applied 

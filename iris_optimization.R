@@ -6,7 +6,6 @@ library(QGA)
 data(iris)
 iris$id <- c(1:nrow(iris))
 iris$dom <- 1
-library(SamplingStrata)
 frame <- buildFrameDF(
   df = iris,
   id = "id",
@@ -26,7 +25,7 @@ nstrat = 3
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 200
+generation_max = 500
 nvalues_sol = nstrat
 Genome = 150
 Genome_el = 2
@@ -36,7 +35,14 @@ pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
 mutation_rate_min = 1/(Genome + 1)
-mutation_flag = FALSE
+
+pop_mutation_rate_max = 0.05
+pop_mutation_rate_min = 0.05
+mutation_rate_max = 0.05
+mutation_rate_min = 0.05
+
+
+mutation_flag = TRUE
 eval_fitness = best_stratification
 eval_func_inputs = list(frame, cv)
 #----------------------
