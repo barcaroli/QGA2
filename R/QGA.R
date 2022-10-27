@@ -158,7 +158,6 @@ QGA <- function(popsize = 20,
   generate_pop <- function() {
     for (i in c(1:popsize)) {
       for (j in c(1:genomeLength)) {
-        set.seed(1234)
         theta <- runif(1) * 360
         theta <- pi*theta
         rot[1, 1] <- cos(theta)
@@ -178,7 +177,6 @@ QGA <- function(popsize = 20,
   measure <- function() {
     for (i in (1:popsize)) {
       for (j in (1:genomeLength)) {
-        set.seed(1234)
         p_alpha <- runif(1)
         if (p_alpha <= 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 0
         if (p_alpha > 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 1
