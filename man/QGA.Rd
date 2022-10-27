@@ -9,7 +9,6 @@ QGA(
   generation_max = 200,
   nvalues_sol,
   Genome,
-  Genome_el,
   thetamax = 3.1415926535 * 0.05,
   thetamin = 3.1415926535 * 0.025,
   pop_mutation_rate_max = 1/(popsize + 1),
