@@ -34,13 +34,6 @@ pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
 mutation_rate_min = 1/(Genome + 1)
-
-pop_mutation_rate_max = 0.05
-pop_mutation_rate_min = 0.05
-mutation_rate_max = 0.05
-mutation_rate_min = 0.05
-
-
 mutation_flag = TRUE
 eval_fitness = best_stratification
 eval_func_inputs = list(frame, cv)
