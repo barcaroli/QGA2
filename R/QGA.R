@@ -340,7 +340,7 @@ QGA <- function(popsize = 20,
   #-----------------  
     
   repair <- function(chromosome) {
-    diff = 2^Genome_el - nstrat
+    diff = 2^Genome_el - nvalues_sol
     for (i in c(1:popsize)) {
       solution1 <- array(chromosome[i,],c(Genome_el,Genome))
       solution <- c(rep(0,Genome))
@@ -354,7 +354,7 @@ QGA <- function(popsize = 20,
       sum(table(solution))
       t <- as.numeric(table(solution))
       length(t)
-      if (length(t) > nstrat) { 
+      if (length(t) > nvalues_sol) { 
         solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] <- solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] - diff
       }
       a = array(c(1:genomeLength),c(Genome_el,Genome))
@@ -457,6 +457,7 @@ QGA <- function(popsize = 20,
   generation <- 1
   q_alphabeta <- generate_pop()
   chromosome <- measure()
+  chromosome <- repair(chromosome)
   a <- evaluate(chromosome,
                     best_chromosome,
                     popsize,

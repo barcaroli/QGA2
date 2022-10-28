@@ -21,7 +21,7 @@ cv <- as.data.frame(list(
   CV4 = 0.03,
   domainvalue = 1
 ))
-nstrat = 3
+nstrat = 2
 #----------------------
 # Set parameters
 popsize = 20
