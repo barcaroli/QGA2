@@ -61,9 +61,8 @@ Main function to execute a Quantum Genetic Algorithm
 }
 \details{
 This function is the 'engine', which performs the quantum genetic algorithm calling
-two more functions that need to be developed or personalized:
-1. eval_fitness
-2. repair_function
+the function for the evaluation of the fitness that is specific for the particulare
+problem to be optmized.
 }
 \examples{
 #----------------------
