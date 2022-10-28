@@ -7,9 +7,8 @@
 #' @details
 #' 
 #' This function is the 'engine', which performs the quantum genetic algorithm calling
-#' two more functions that need to be developed or personalized:
-#' 1. eval_fitness
-#' 2. repair_function
+#' the function for the evaluation of the fitness that is specific for the particulare
+#' problem to be optmized.
 #' 
 #' @param popsize the number of generated solutions (population) to be evaluated at each iteration
 #' (default is 20)
@@ -398,7 +397,51 @@ QGA <- function(popsize = 20,
     )
   }  
   
-
+  #---------------------------
+  # EVALUATION OF THE SOLUTION                   
+  #---------------------------
+  evaluate <- function(chromosome,
+                       best_chromosome,
+                       popsize,
+                       Genome,
+                       Genome_el,
+                       nvalues_sol,
+                       generation,
+                       eval_fitness,
+                       eval_func_inputs){
+    fitness <- array(0.0, c(1, popsize))
+    fitness_total <- 0
+    fitness_average <- -99999999
+    fitness_max <- -999999999
+    the_best_chromosome <- 0
+    for (i in c(1:popsize)) {
+      solution1 <- array(chromosome[i,],c(Genome_el,Genome))
+      solution <- c(rep(0,Genome))
+      for (x in c(1:Genome)) {
+        for (y in c(1:Genome_el)) {
+          solution[x] <- solution[x] + solution1[y,x]*2^(Genome_el - y) 
+        }
+      }
+      solution <- solution + 1
+      fitness[i] <- eval_fitness(solution,eval_func_inputs)
+      fitness_total <- fitness_total + fitness[i]
+      if (fitness[i] >= fitness_max) {
+        fitness_max <- fitness[i]
+        the_best_chromosome <- i
+        solution_max <- chromosome[i, ]
+      }
+    }
+    fitness_average <- fitness_total / popsize
+    best_chromosome[generation] <- the_best_chromosome
+    return(list(
+      fitness = fitness,
+      fitness_max = fitness_max,
+      fitness_average = fitness_average,
+      best_chromosome = best_chromosome,
+      solution_max = solution_max)
+    )
+  }
+  
   #----------
   # EXECUTION                   
   #----------
@@ -414,13 +457,14 @@ QGA <- function(popsize = 20,
   generation <- 1
   q_alphabeta <- generate_pop()
   chromosome <- measure()
-  a <- eval_fitness(chromosome,
+  a <- evaluate(chromosome,
                     best_chromosome,
                     popsize,
                     Genome,
                     Genome_el,
                     nvalues_sol,
                     generation,
+                    eval_fitness,
                     eval_func_inputs)
   fitness <- a$fitness
   fitness_max <- a$fitness_max
@@ -466,13 +510,14 @@ QGA <- function(popsize = 20,
     }
     chromosome <- measure()
     chromosome <- repair(chromosome)
-    a <- eval_fitness(chromosome,
+    a <- evaluate(chromosome,
                       best_chromosome,
                       popsize,
                       Genome,
                       Genome_el,
                       nvalues_sol,
                       generation,
+                      eval_fitness,
                       eval_func_inputs)
     fitness <- a$fitness
     fitness_max <- a$fitness_max
