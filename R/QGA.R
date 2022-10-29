@@ -29,6 +29,8 @@
 #' @param mutation_rate_min minimum mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each element of the chromosome (default is 1/(Genome+1))
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
+#' @plot flag indicating plotting during iterations
+#' @verbose flag indicating printing fitness during iterations
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
 #' @param eval_func_inputs specific inputs required by the eval_fitness function
 #' 
@@ -115,6 +117,8 @@ QGA <- function(popsize = 20,
                 mutation_rate_max = 1/(Genome+1),
                 mutation_rate_min = 1/(Genome+1),
                 mutation_flag = TRUE,
+                plot = TRUE,
+                verbose = TRUE,
                 eval_fitness,
                 eval_func_inputs) {
   
@@ -339,6 +343,10 @@ QGA <- function(popsize = 20,
   # REPAIR PROCEDURE                 
   #-----------------  
     
+  #-----------------
+  # REPAIR PROCEDURE                 
+  #-----------------  
+  
   repair <- function(chromosome) {
     diff = 2^Genome_el - nvalues_sol
     for (i in c(1:popsize)) {
@@ -350,12 +358,15 @@ QGA <- function(popsize = 20,
         }
       }
       solution <- solution + 1
+      solution[order(solution)]
       table(solution)
-      sum(table(solution))
-      t <- as.numeric(table(solution))
-      length(t)
-      if (length(t) > nvalues_sol) { 
-        solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] <- solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] - diff
+      # sum(table(solution))
+      # t <- as.numeric(table(solution))
+      # length(t)
+      # if (length(t) > nvalues_sol) { 
+      if (max(solution) > nvalues_sol) { 
+        # solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] <- solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] - diff
+        solution[!(solution %in% c(1:(length(solution)-diff+1)))] <- solution[!(solution %in% c(1:(length(solution)-diff+1)))] - diff
       }
       a = array(c(1:genomeLength),c(Genome_el,Genome))
       for (x in c(1:Genome)) {
@@ -389,7 +400,7 @@ QGA <- function(popsize = 20,
       type = "l", data = res, col = "red",
       ylim = (c(ymin, ymax)), ylab = "Fitness"
     )
-    title("QGA - Best stratification")
+    title(paste("QGA - ",eval_fitness))
     points(fitness_best ~ generation, type = "l", data = res, col = "black")
     legend("bottomright",
       legend = c("Best fitness: BLACK", "Average fitness: RED"),
@@ -478,8 +489,8 @@ QGA <- function(popsize = 20,
   }
   res$fitness_average[generation] <- fitness_average
   res$fitness_best[generation] <- fitness_best
-  plot_Output(res[c(1:generation), ])
-  cat("\n***", generation, ",", fitness_average, ",", fitness_max)
+  if (plot == TRUE) plot_Output(res[c(1:generation), ])
+  cat("\n", generation, ",", fitness_average, ",", fitness_max)
   
   while (generation <= generation_max) {
     # cat("\n Iteration: ",generation)
@@ -531,10 +542,11 @@ QGA <- function(popsize = 20,
     }
     res$fitness_average[generation] <- fitness_average
     res$fitness_best[generation] <- fitness_best
-    plot_Output(res[c(1:generation), ])
-    cat("\n", generation, ",", fitness_average, ",", fitness_best)
+    if (plot == TRUE) plot_Output(res[c(1:generation), ])
+    if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_best)
   }
-  
+  cat("\n *** Best fitness: ",fitness_best)
+  plot_Output(res)
   solution1 <- array(solution_best,c(Genome_el,Genome))
   solution <- c(rep(0,Genome))
   for (x in c(1:Genome)) {

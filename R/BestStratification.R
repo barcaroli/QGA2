@@ -6,7 +6,7 @@
 #' 
 #' @details
 #' 
-#' This function is the one that perform the evaluation of the fitness in the case of 
+#' This function is the one that performs the evaluation of the fitness in the case of 
 #' the optimization of a sampling frame stratification.
 #' The function takes one of the solutions considered at the k-th iteration of the Quantum
 #' Genetic Algorithm, and determines the minimum sample size required to
@@ -21,7 +21,7 @@
 #' @export
 #'  
 #' 
-best_stratification <- function(solution,
+BestStratification <- function(solution,
                                 eval_func_inputs) {
   require(SamplingStrata)
   nstrat <- length(table(solution))
