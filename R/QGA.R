@@ -29,7 +29,7 @@
 #' @param mutation_rate_min minimum mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each element of the chromosome (default is 1/(Genome+1))
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
-#' @param plot flag indicating plotting during iterations
+#' @param plotting flag indicating plotting during iterations
 #' @param verbose flag indicating printing fitness during iterations
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
 #' @param eval_func_inputs specific inputs required by the eval_fitness function
@@ -117,22 +117,17 @@ QGA <- function(popsize = 20,
                 mutation_rate_max = 1/(Genome+1),
                 mutation_rate_min = 1/(Genome+1),
                 mutation_flag = TRUE,
-                plot = TRUE,
+                plotting = TRUE,
                 verbose = TRUE,
                 eval_fitness,
                 eval_func_inputs) {
-  
   # Calculate the number of (qu)bits necessary for each element in the genome/chromosome
   n = 0
   while (nvalues_sol > 2^n) {
     n = n+1
   }
-   
   Genome_el = n 
-
   genomeLength <- Genome * Genome_el 
-  
-  
   #---------------------
   #  WORKING VARIABLES                                  
   #---------------------
@@ -342,11 +337,7 @@ QGA <- function(popsize = 20,
   #-----------------
   # REPAIR PROCEDURE                 
   #-----------------  
-    
-  #-----------------
-  # REPAIR PROCEDURE                 
-  #-----------------  
-  
+
   repair <- function(chromosome) {
     diff = 2^Genome_el - nvalues_sol
     for (i in c(1:popsize)) {
@@ -398,9 +389,9 @@ QGA <- function(popsize = 20,
   
     plot(fitness_average ~ generation,
       type = "l", data = res, col = "red",
-      ylim = (c(ymin, ymax)), ylab = "Fitness"
+      ylim = (c(ymin, ymax)), ylab = "Fitness", xlab="Iteration"
     )
-    title(paste("QGA - ",eval_fitness))
+    title("QGA - Optimization")
     points(fitness_best ~ generation, type = "l", data = res, col = "black")
     legend("bottomright",
       legend = c("Best fitness: BLACK", "Average fitness: RED"),
@@ -489,10 +480,12 @@ QGA <- function(popsize = 20,
   }
   res$fitness_average[generation] <- fitness_average
   res$fitness_best[generation] <- fitness_best
-  if (plot == TRUE) plot_Output(res[c(1:generation), ])
-  cat("\n", generation, ",", fitness_average, ",", fitness_max)
+  if (plotting == TRUE) plot_Output(res[c(1:generation), ])
+  if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_max)
   
+  if (verbose == FALSE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
   while (generation <= generation_max) {
+    if (verbose == FALSE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetamax - ((thetamax - thetamin) / generation_max) * generation
     if (theta < 0) theta <- 0
@@ -542,9 +535,10 @@ QGA <- function(popsize = 20,
     }
     res$fitness_average[generation] <- fitness_average
     res$fitness_best[generation] <- fitness_best
-    if (plot == TRUE) plot_Output(res[c(1:generation), ])
+    if (plotting == TRUE) plot_Output(res[c(1:generation), ])
     if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_best)
   }
+  if (verbose == FALSE) close(pb)
   cat("\n *** Best fitness: ",fitness_best)
   plot_Output(res)
   solution1 <- array(solution_best,c(Genome_el,Genome))
