@@ -29,8 +29,8 @@
 #' @param mutation_rate_min minimum mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each element of the chromosome (default is 1/(Genome+1))
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
-#' @plot flag indicating plotting during iterations
-#' @verbose flag indicating printing fitness during iterations
+#' @param plot flag indicating plotting during iterations
+#' @param verbose flag indicating printing fitness during iterations
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
 #' @param eval_func_inputs specific inputs required by the eval_fitness function
 #' 

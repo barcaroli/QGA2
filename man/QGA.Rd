@@ -16,6 +16,8 @@ QGA(
   mutation_rate_max = 1/(Genome + 1),
   mutation_rate_min = 1/(Genome + 1),
   mutation_flag = TRUE,
+  plot = TRUE,
+  verbose = TRUE,
   eval_fitness,
   eval_func_inputs
 )
@@ -48,6 +50,10 @@ to each element of the chromosome  (default is 1/(Genome+1)))}
 to each element of the chromosome (default is 1/(Genome+1))}
 
 \item{mutation_flag}{flag indicating if the mutation gate is to be applied or not (default is TRUE)}
+
+\item{plot}{flag indicating plotting during iterations}
+
+\item{verbose}{flag indicating printing fitness during iterations}
 
 \item{eval_fitness}{name of the function that will be used to evaluate the fitness of each solution}
 
