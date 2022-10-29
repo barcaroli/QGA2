@@ -7,11 +7,11 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 2000
+generation_max = 30000
 nvalues_sol = nrow(cities)
 Genome = nrow(cities)
-thetamax = 3.1415926535 * 0.001
-thetamin = 3.1415926535 * 0.001
+thetamax = 3.1415926535 * 0.0003
+thetamin = 3.1415926535 * 0.0003
 pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
@@ -42,7 +42,7 @@ solution <- QGA(popsize,
 # Analyze results
 cities$city[solution]
 cities_tsp <- cities[solution,]
-plot(y~x,data=cities_tsp)
+plot(y~x,data=cities_tsp,xlab="Longitudes",ylab="Latitudes")
 polygon(cities_tsp$x,cities_tsp$y,border="red")
 text(x = cities_tsp$x, y = cities_tsp$y, labels = cities_tsp$city, cex=.75)
 title("Best path")

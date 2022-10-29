@@ -92,6 +92,8 @@
 #'                 mutation_rate_max,
 #'                 mutation_rate_min,
 #'                 mutation_flag,
+#'                 plotting = TRUE,
+#'                 verbose = FALSE,
 #'                 eval_fitness,
 #'                 eval_func_inputs)
 #' #----------------------
@@ -340,6 +342,7 @@ QGA <- function(popsize = 20,
 
   repair <- function(chromosome) {
     diff = 2^Genome_el - nvalues_sol
+    acceptable_values <- c(1:(2^Genome_el - diff))
     for (i in c(1:popsize)) {
       solution1 <- array(chromosome[i,],c(Genome_el,Genome))
       solution <- c(rep(0,Genome))
@@ -351,13 +354,8 @@ QGA <- function(popsize = 20,
       solution <- solution + 1
       solution[order(solution)]
       table(solution)
-      # sum(table(solution))
-      # t <- as.numeric(table(solution))
-      # length(t)
-      # if (length(t) > nvalues_sol) { 
       if (max(solution) > nvalues_sol) { 
-        # solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] <- solution[solution %in% c(which(t==min(t))[1]:length(t)) & !(solution %in% c(1:diff))] - diff
-        solution[!(solution %in% c(1:(length(solution)-diff+1)))] <- solution[!(solution %in% c(1:(length(solution)-diff+1)))] - diff
+        solution[!(solution %in% acceptable_values)] <- solution[!(solution %in% acceptable_values)] - diff
       }
       a = array(c(1:genomeLength),c(Genome_el,Genome))
       for (x in c(1:Genome)) {
