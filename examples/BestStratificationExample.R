@@ -21,11 +21,11 @@ cv <- as.data.frame(list(
   CV4 = 0.03,
   domainvalue = 1
 ))
-nstrat = 12
+nstrat = 2
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 50
+generation_max = 500
 nvalues_sol = nstrat
 Genome = 150
 thetamax = 3.1415926535 * 0.05

@@ -256,7 +256,7 @@ QGA <- function(popsize = 20,
                 rot[1, 1] <- cos(-0.05*pi)
                 rot[1, 2] <- -sin(-0.05*pi)
                 rot[2, 1] <- sin(-0.05*pi)
-                rot[2, 2] <- cos(0.05*pi)
+                rot[2, 2] <- cos(-0.05*pi)
                 work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
                 work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
                 q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
@@ -274,6 +274,28 @@ QGA <- function(popsize = 20,
               }
             }
             if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 0) {
+              if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
+                rot[1, 1] <- cos(theta)
+                rot[1, 2] <- -sin(theta)
+                rot[2, 1] <- sin(theta)
+                rot[2, 2] <- cos(theta)
+                work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
+                work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
+                q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
+                q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
+              }
+              if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
+                rot[1, 1] <- cos(-theta)
+                rot[1, 2] <- -sin(-theta)
+                rot[2, 1] <- sin(-theta)
+                rot[2, 2] <- cos(-theta)
+                work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
+                work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
+                q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
+                q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
+              }
+            }
+            if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 1) {
               if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
                 rot[1, 1] <- cos(theta)
                 rot[1, 2] <- -sin(theta)

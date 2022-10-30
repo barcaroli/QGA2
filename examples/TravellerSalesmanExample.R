@@ -7,11 +7,11 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 15000
+generation_max = 3000
 nvalues_sol = nrow(cities)
 Genome = nrow(cities)
-thetamax = 3.1415926535 * 0.003
-thetamin = 3.1415926535 * 0.001
+thetamax = 3.1415926535 * 0.01
+thetamin = 3.1415926535 * 0.003
 pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
