@@ -361,7 +361,6 @@ QGA <- function(popsize = 20,
   #-----------------
   # REPAIR PROCEDURE                 
   #-----------------  
-
   repair <- function(chromosome) {
     diff = 2^Genome_el - nvalues_sol
     acceptable_values <- c(1:(2^Genome_el - diff))
@@ -375,9 +374,16 @@ QGA <- function(popsize = 20,
       }
       solution <- solution + 1
       solution[order(solution)]
-      table(solution)
+      # table(solution)
+      t <- as.data.frame(table(solution))
+      # sum(t$Freq[!(t$solution %in% acceptable_values)])
+      t$solution <- as.integer(levels(t$solution))
+      s <- as.data.frame(acceptable_values)
+      t2 <- merge(t,s,by.x="solution",by.y="acceptable_values",all.x=TRUE,all.y=TRUE)
+      # c(t2$solution[is.na(t2$Freq)])[c(1:sum(t$Freq[!(t$solution %in% acceptable_values)]))]
       if (max(solution) > nvalues_sol) { 
-        solution[!(solution %in% acceptable_values)] <- solution[!(solution %in% acceptable_values)] - diff
+        # solution[!(solution %in% acceptable_values)] <- solution[!(solution %in% acceptable_values)] - diff
+        solution[!(solution %in% acceptable_values)] <- c(t2$solution[is.na(t2$Freq)])[c(1:sum(t$Freq[!(t$solution %in% acceptable_values)]))]
       }
       a = array(c(1:genomeLength),c(Genome_el,Genome))
       for (x in c(1:Genome)) {
