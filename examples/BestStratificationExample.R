@@ -21,15 +21,15 @@ cv <- as.data.frame(list(
   CV4 = 0.03,
   domainvalue = 1
 ))
-nstrat = 2
+nstrat = 10
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 500
+generation_max = 2000
 nvalues_sol = nstrat
 Genome = 150
-thetamax = 3.1415926535 * 0.05
-thetamin = 3.1415926535 * 0.025
+thetainit = 3.1415926535 * 0.05
+thetaend = 3.1415926535 * 0.025
 pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
@@ -43,8 +43,8 @@ solution <- QGA(popsize,
                 generation_max,
                 nvalues_sol,
                 Genome,
-                thetamax,
-                thetamin,
+                thetainit,
+                thetaend,
                 pop_mutation_rate_max,
                 pop_mutation_rate_min,
                 mutation_rate_max,
@@ -65,3 +65,16 @@ sum(bethel(strata, cv, realAllocation = TRUE))
 iris$stratum <- solution
 table(iris$Species, iris$stratum)
 
+
+
+#-------------------------------
+# Comparison with SamplingStrata
+# sol <-optimStrata(method = "atomic",
+#                   framesamp = frame,
+#                   nStrata = nstrat,
+#                   errors = cv,
+#                   pops = popsize,
+#                   minnumstr = 1,
+#                   iter = 4000)
+# sum(sol$aggr_strata$SOLUZ)
+# [1] 13.21041

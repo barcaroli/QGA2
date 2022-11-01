@@ -15,10 +15,12 @@
 #' @param generation_max the number of iterations to be performed
 #' (default is 200)
 #' @param Genome the length of the genome (or chromosome), representing a possible solution 
-#' #' #' @param nvalues_sol the number of possible integer values contained in each element of the solution 
-#' #' @param thetamax the maximum angle (expressed in radiants) to be used when applying the rotation gate 
+#' @param nvalues_sol the number of possible integer values contained in each element of the solution 
+#' #' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
+#' when starting the iterations 
 #' (default is pi * 0.05, where pi = 3.1415926535)
-#' @param thetamin the minimum angle (expressed in radiants) to be used when applying the rotation gate 
+#' @param thetaend the angle (expressed in radiants) to be used when applying the rotation gate 
+#' at the end of the iterations
 #' (default is pi * 0.025, where pi = 3.1415926535)
 #' @param pop_mutation_rate_max maximum mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each individual in the population (default is 1/(popsize+1))
@@ -70,8 +72,8 @@
 #' generation_max = 200
 #' nvalues_sol = nstrat
 #' Genome = 150
-#' thetamax = 3.1415926535 * 0.05
-#' thetamin = 3.1415926535 * 0.025
+#' thetainit = 3.1415926535 * 0.05
+#' thetaend = 3.1415926535 * 0.025
 #' pop_mutation_rate_max = 1/(popsize + 1)
 #' pop_mutation_rate_min = 1/(popsize + 1)
 #' mutation_rate_max = 1/(Genome + 1)
@@ -85,8 +87,8 @@
 #'                 generation_max,
 #'                 nvalues_sol,
 #'                 Genome,
-#'                 thetamax,
-#'                 thetamin,
+#'                 thetainit,
+#'                 thetaend,
 #'                 pop_mutation_rate_max,
 #'                 pop_mutation_rate_min,
 #'                 mutation_rate_max,
@@ -112,8 +114,8 @@ QGA <- function(popsize = 20,
                 generation_max = 200,
                 nvalues_sol,
                 Genome,
-                thetamax = 3.1415926535 * 0.05,
-                thetamin = 3.1415926535 * 0.025,
+                thetainit = 3.1415926535 * 0.05,
+                thetaend = 3.1415926535 * 0.025,
                 pop_mutation_rate_max = 1/(popsize+1),
                 pop_mutation_rate_min = 1/(popsize+1),
                 mutation_rate_max = 1/(Genome+1),
@@ -507,7 +509,7 @@ QGA <- function(popsize = 20,
   while (generation <= generation_max) {
     if (verbose == FALSE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
-    theta <- thetamax - ((thetamax - thetamin) / generation_max) * generation
+    theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation
     if (theta < 0) theta <- 0
     q_alphabeta <- rotation(chromosome,
                             best_chromosome,
