@@ -1,9 +1,15 @@
+#---------------------------------------------
+# Application of the Quantum Genetic Algorithm
+# to the Traveler Salesman Problem
+#---------------------------------------------
+
+
 #----------------------
 library(QGA)
 #----------------------
 # Prepare data for fitness evaluation
 cities <- read.csv("cities.csv")
-ncities <- 10
+ncities <- 8
 cities <- cities[c(1:ncities),]
 distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------

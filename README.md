@@ -1,5 +1,5 @@
 
-# Quantum Genetic Algorithm R package
+# QGA (Quantum Genetic Algorithm) R package
 
 This package allows the application of the Quantum Genetic Algorithm
 that was first proposed by Han and Kim in 2000.
@@ -24,8 +24,8 @@ The X-Pauli gate is equivalent to the classical mutation operator and
 determines the swap between alfa and beta amplitudes of a given qubit.
 
 The package has been developed in such a way as to permit a complete
-separation between the “engine”, and the particular problem object of
-the combinatorial optimization. So far, two specific problems have been
+separation between the “engine”, and the particular problem subject to
+combinatorial optimization. So far, two specific problems have been
 implemented:
 
 1.  best stratification of a sampling frame;
@@ -40,9 +40,73 @@ devtools::install_github("barcaroli/QGA")
 
 they can be run, and their results analyzed.
 
-For instance, in the case of the optimization of a sampling frame:
+In the case of the traveler salesman problem:
 
 ``` r
+#---------------------------------------------
+# Application of the Quantum Genetic Algorithm
+# to the Traveler Salesman Problem
+#---------------------------------------------
+
+
+#----------------------
+library(QGA)
+#----------------------
+# Prepare data for fitness evaluation
+cities <- read.csv("cities.csv")
+ncities <- 8
+cities <- cities[c(1:ncities),]
+distance <- as.matrix(dist(cities[,c(2:3)]))
+#----------------------
+# Set parameters
+popsize = 20
+generation_max = 2000
+nvalues_sol = nrow(cities)
+Genome = nrow(cities)
+thetainit = 3.1415926535 * 0.01
+thetaend = 3.1415926535 * 0.001
+pop_mutation_rate_init = 1/(popsize + 1)
+pop_mutation_rate_end = 1/(popsize + 1)
+mutation_rate_init = 1/(Genome + 1)
+mutation_rate_end = 1/(Genome + 1)
+mutation_flag = FALSE
+eval_fitness = TravellerSalesman
+eval_func_inputs = distance
+#----------------------
+# Perform optimization
+solution <- QGA(popsize,
+                generation_max,
+                nvalues_sol,
+                Genome,
+                thetainit,
+                thetaend,
+                pop_mutation_rate_init,
+                pop_mutation_rate_end,
+                mutation_rate_init,
+                mutation_rate_end,
+                mutation_flag,
+                plotting = FALSE,
+                verbose = FALSE,
+                eval_fitness,
+                eval_func_inputs)
+#----------------------
+# Analyze results
+cities$city[solution]
+cities_tsp <- cities[solution,]
+plot(y~x,data=cities_tsp)
+polygon(cities_tsp$x,cities_tsp$y,border="red")
+text(x = cities_tsp$x, y = cities_tsp$y, labels = cities_tsp$city, cex=.75)
+title("Best path")
+```
+
+In the case of the optimization of a sampling frame:
+
+``` r
+#---------------------------------------------
+# Application of the Quantum Genetic Algorithm
+# to the optimization of a sampling frame
+#---------------------------------------------
+
 #----------------------
 library(SamplingStrata)
 library(QGA)
@@ -109,8 +173,8 @@ sum(bethel(strata, cv, realAllocation = TRUE))
 iris$stratum <- solution
 table(iris$Species, iris$stratum)
 
-#-------------------------------------------------------------
-# Comparison with SamplingStrata (classical genetic algorithm)
+#-------------------------------
+# Comparison with SamplingStrata
 sol <-optimStrata(method = "atomic",
                   framesamp = frame,
                   nStrata = nstrat,

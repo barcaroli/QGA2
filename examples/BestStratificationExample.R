@@ -1,3 +1,8 @@
+#---------------------------------------------
+# Application of the Quantum Genetic Algorithm
+# to the optimization of a sampling frame
+#---------------------------------------------
+
 #----------------------
 library(SamplingStrata)
 library(QGA)
@@ -61,7 +66,6 @@ strata <- aggrStrata2(dataset = frame,
                       vett = solution, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
-# [1] 13
 iris$stratum <- solution
 table(iris$Species, iris$stratum)
 
@@ -73,6 +77,5 @@ table(iris$Species, iris$stratum)
 #                   errors = cv,
 #                   pops = popsize,
 #                   minnumstr = 1,
-#                   iter = 4000)
+#                   iter = 500)
 # sum(sol$aggr_strata$SOLUZ)
-# [1] 13.21041
