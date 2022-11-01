@@ -16,7 +16,7 @@
 #' (default is 200)
 #' @param Genome the length of the genome (or chromosome), representing a possible solution 
 #' @param nvalues_sol the number of possible integer values contained in each element of the solution 
-#' #' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
+#' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
 #' when starting the iterations 
 #' (default is pi * 0.05, where pi = 3.1415926535)
 #' @param thetaend the angle (expressed in radiants) to be used when applying the rotation gate 
@@ -510,6 +510,10 @@ QGA <- function(popsize = 20,
     if (verbose == FALSE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation
+    # switch_theta = generation_max * 0.25
+    # if (generation < switch_theta) theta = thetainit
+    # if (generation >= switch_theta) theta = thetaend
+    
     if (theta < 0) theta <- 0
     q_alphabeta <- rotation(chromosome,
                             best_chromosome,

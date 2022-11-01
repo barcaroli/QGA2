@@ -2,15 +2,17 @@
 library(QGA)
 #----------------------
 # Prepare data for fitness evaluation
-cities <- read.csv("cities10.csv")
+cities <- read.csv("cities.csv")
+ncities <- 10
+cities <- cities[c(1:ncities),]
 distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
 # Set parameters
-popsize = 40
-generation_max = 5000
+popsize = 20
+generation_max = 2000
 nvalues_sol = nrow(cities)
 Genome = nrow(cities)
-thetainit = 3.1415926535 * 0.005
+thetainit = 3.1415926535 * 0.01
 thetaend = 3.1415926535 * 0.001
 pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
