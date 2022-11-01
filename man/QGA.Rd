@@ -11,10 +11,10 @@ QGA(
   Genome,
   thetainit = 3.1415926535 * 0.05,
   thetaend = 3.1415926535 * 0.025,
-  pop_mutation_rate_max = 1/(popsize + 1),
-  pop_mutation_rate_min = 1/(popsize + 1),
-  mutation_rate_max = 1/(Genome + 1),
-  mutation_rate_min = 1/(Genome + 1),
+  pop_mutation_rate_init = 1/(popsize + 1),
+  pop_mutation_rate_end = 1/(popsize + 1),
+  mutation_rate_init = 1/(Genome + 1),
+  mutation_rate_end = 1/(Genome + 1),
   mutation_flag = TRUE,
   plotting = TRUE,
   verbose = TRUE,
@@ -29,27 +29,28 @@ QGA(
 \item{generation_max}{the number of iterations to be performed
 (default is 200)}
 
-\item{nvalues_sol}{the number of possible integer values contained in each element of the solution 
-#' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
-when starting the iterations 
-(default is pi * 0.05, where pi = 3.1415926535)}
+\item{nvalues_sol}{the number of possible integer values contained in each element of the solution}
 
 \item{Genome}{the length of the genome (or chromosome), representing a possible solution}
+
+\item{thetainit}{the angle (expressed in radiants) to be used when applying the rotation gate
+when starting the iterations 
+(default is pi * 0.05, where pi = 3.1415926535)}
 
 \item{thetaend}{the angle (expressed in radiants) to be used when applying the rotation gate 
 at the end of the iterations
 (default is pi * 0.025, where pi = 3.1415926535)}
 
-\item{pop_mutation_rate_max}{maximum mutation rate to be used when applying the X-Pauli gate, applied 
+\item{pop_mutation_rate_init}{initial mutation rate to be used when applying the X-Pauli gate, applied 
 to each individual in the population (default is 1/(popsize+1))}
 
-\item{pop_mutation_rate_min}{minimum mutation rate to be used when applying the X-Pauli gate, applied 
+\item{pop_mutation_rate_end}{final mutation rate to be used when applying the X-Pauli gate, applied 
 to each individual in the population (default is 1/(popsize+1))}
 
-\item{mutation_rate_max}{maximum mutation rate to be used when applying the X-Pauli gate, applied 
+\item{mutation_rate_init}{initial mutation rate to be used when applying the X-Pauli gate, applied 
 to each element of the chromosome  (default is 1/(Genome+1)))}
 
-\item{mutation_rate_min}{minimum mutation rate to be used when applying the X-Pauli gate, applied 
+\item{mutation_rate_end}{final mutation rate to be used when applying the X-Pauli gate, applied 
 to each element of the chromosome (default is 1/(Genome+1))}
 
 \item{mutation_flag}{flag indicating if the mutation gate is to be applied or not (default is TRUE)}
@@ -107,10 +108,10 @@ nvalues_sol = nstrat
 Genome = 150
 thetainit = 3.1415926535 * 0.05
 thetaend = 3.1415926535 * 0.025
-pop_mutation_rate_max = 1/(popsize + 1)
-pop_mutation_rate_min = 1/(popsize + 1)
-mutation_rate_max = 1/(Genome + 1)
-mutation_rate_min = 1/(Genome + 1)
+pop_mutation_rate_init = 1/(popsize + 1)
+pop_mutation_rate_end = 1/(popsize + 1)
+mutation_rate_init = 1/(Genome + 1)
+mutation_rate_end = 1/(Genome + 1)
 mutation_flag = FALSE
 eval_fitness = best_stratification
 eval_func_inputs = list(frame, cv)
@@ -122,10 +123,10 @@ solution <- QGA(popsize,
                 Genome,
                 thetainit,
                 thetaend,
-                pop_mutation_rate_max,
-                pop_mutation_rate_min,
-                mutation_rate_max,
-                mutation_rate_min,
+                pop_mutation_rate_init,
+                pop_mutation_rate_end,
+                mutation_rate_init,
+                mutation_rate_end,
                 mutation_flag,
                 plotting = TRUE,
                 verbose = FALSE,

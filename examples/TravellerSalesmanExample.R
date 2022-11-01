@@ -14,10 +14,10 @@ nvalues_sol = nrow(cities)
 Genome = nrow(cities)
 thetainit = 3.1415926535 * 0.01
 thetaend = 3.1415926535 * 0.001
-pop_mutation_rate_max = 1/(popsize + 1)
-pop_mutation_rate_min = 1/(popsize + 1)
-mutation_rate_max = 1/(Genome + 1)
-mutation_rate_min = 1/(Genome + 1)
+pop_mutation_rate_init = 1/(popsize + 1)
+pop_mutation_rate_end = 1/(popsize + 1)
+mutation_rate_init = 1/(Genome + 1)
+mutation_rate_end = 1/(Genome + 1)
 mutation_flag = FALSE
 eval_fitness = TravellerSalesman
 eval_func_inputs = distance
@@ -29,10 +29,10 @@ solution <- QGA(popsize,
                 Genome,
                 thetainit,
                 thetaend,
-                pop_mutation_rate_max,
-                pop_mutation_rate_min,
-                mutation_rate_max,
-                mutation_rate_min,
+                pop_mutation_rate_init,
+                pop_mutation_rate_end,
+                mutation_rate_init,
+                mutation_rate_end,
                 mutation_flag,
                 plotting = FALSE,
                 verbose = FALSE,

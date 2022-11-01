@@ -22,13 +22,13 @@
 #' @param thetaend the angle (expressed in radiants) to be used when applying the rotation gate 
 #' at the end of the iterations
 #' (default is pi * 0.025, where pi = 3.1415926535)
-#' @param pop_mutation_rate_max maximum mutation rate to be used when applying the X-Pauli gate, applied 
+#' @param pop_mutation_rate_init initial mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each individual in the population (default is 1/(popsize+1))
-#' @param pop_mutation_rate_min minimum mutation rate to be used when applying the X-Pauli gate, applied 
+#' @param pop_mutation_rate_end final mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each individual in the population (default is 1/(popsize+1))
-#' @param mutation_rate_max maximum mutation rate to be used when applying the X-Pauli gate, applied 
+#' @param mutation_rate_init initial mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each element of the chromosome  (default is 1/(Genome+1)))
-#' @param mutation_rate_min minimum mutation rate to be used when applying the X-Pauli gate, applied 
+#' @param mutation_rate_end final mutation rate to be used when applying the X-Pauli gate, applied 
 #' to each element of the chromosome (default is 1/(Genome+1))
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
 #' @param plotting flag indicating plotting during iterations
@@ -74,10 +74,10 @@
 #' Genome = 150
 #' thetainit = 3.1415926535 * 0.05
 #' thetaend = 3.1415926535 * 0.025
-#' pop_mutation_rate_max = 1/(popsize + 1)
-#' pop_mutation_rate_min = 1/(popsize + 1)
-#' mutation_rate_max = 1/(Genome + 1)
-#' mutation_rate_min = 1/(Genome + 1)
+#' pop_mutation_rate_init = 1/(popsize + 1)
+#' pop_mutation_rate_end = 1/(popsize + 1)
+#' mutation_rate_init = 1/(Genome + 1)
+#' mutation_rate_end = 1/(Genome + 1)
 #' mutation_flag = FALSE
 #' eval_fitness = best_stratification
 #' eval_func_inputs = list(frame, cv)
@@ -89,10 +89,10 @@
 #'                 Genome,
 #'                 thetainit,
 #'                 thetaend,
-#'                 pop_mutation_rate_max,
-#'                 pop_mutation_rate_min,
-#'                 mutation_rate_max,
-#'                 mutation_rate_min,
+#'                 pop_mutation_rate_init,
+#'                 pop_mutation_rate_end,
+#'                 mutation_rate_init,
+#'                 mutation_rate_end,
 #'                 mutation_flag,
 #'                 plotting = TRUE,
 #'                 verbose = FALSE,
@@ -116,10 +116,10 @@ QGA <- function(popsize = 20,
                 Genome,
                 thetainit = 3.1415926535 * 0.05,
                 thetaend = 3.1415926535 * 0.025,
-                pop_mutation_rate_max = 1/(popsize+1),
-                pop_mutation_rate_min = 1/(popsize+1),
-                mutation_rate_max = 1/(Genome+1),
-                mutation_rate_min = 1/(Genome+1),
+                pop_mutation_rate_init = 1/(popsize+1),
+                pop_mutation_rate_end = 1/(popsize+1),
+                mutation_rate_init = 1/(Genome+1),
+                mutation_rate_end = 1/(Genome+1),
                 mutation_flag = TRUE,
                 plotting = TRUE,
                 verbose = TRUE,
@@ -525,11 +525,9 @@ QGA <- function(popsize = 20,
                             popsize,
                             fitness, 
                             theta)
-    # pop_mutation_rate <- pop_mutation_rate_min + ((pop_mutation_rate_max - pop_mutation_rate_min) / generation_max) * generation
-    # mutation_rate <- mutation_rate_min + ((mutation_rate_max - mutation_rate_min) / generation_max) * generation
     generation <- generation + 1
-    pop_mutation_rate = pop_mutation_rate_max - ((pop_mutation_rate_max - pop_mutation_rate_min) / generation_max) * generation
-    mutation_rate = mutation_rate_max - ((mutation_rate_max - mutation_rate_min) / generation_max) * generation
+    pop_mutation_rate = pop_mutation_rate_init - ((pop_mutation_rate_init - pop_mutation_rate_end) / generation_max) * generation
+    mutation_rate = mutation_rate_init - ((mutation_rate_init - mutation_rate_end) / generation_max) * generation
     if (mutation_flag == TRUE) {
       q_alphabeta <- mutation(pop_mutation_rate, 
                               mutation_rate,
