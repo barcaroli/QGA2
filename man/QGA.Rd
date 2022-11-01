@@ -9,14 +9,14 @@ QGA(
   generation_max = 200,
   nvalues_sol,
   Genome,
-  thetamax = 3.1415926535 * 0.05,
-  thetamin = 3.1415926535 * 0.025,
+  thetainit = 3.1415926535 * 0.05,
+  thetaend = 3.1415926535 * 0.025,
   pop_mutation_rate_max = 1/(popsize + 1),
   pop_mutation_rate_min = 1/(popsize + 1),
   mutation_rate_max = 1/(Genome + 1),
   mutation_rate_min = 1/(Genome + 1),
   mutation_flag = TRUE,
-  plot = TRUE,
+  plotting = TRUE,
   verbose = TRUE,
   eval_fitness,
   eval_func_inputs
@@ -29,12 +29,15 @@ QGA(
 \item{generation_max}{the number of iterations to be performed
 (default is 200)}
 
-\item{Genome}{the length of the genome (or chromosome), representing a possible solution 
-#' #' @param nvalues_sol the number of possible integer values contained in each element of the solution 
-#' @param thetamax the maximum angle (expressed in radiants) to be used when applying the rotation gate 
+\item{nvalues_sol}{the number of possible integer values contained in each element of the solution 
+#' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
+when starting the iterations 
 (default is pi * 0.05, where pi = 3.1415926535)}
 
-\item{thetamin}{the minimum angle (expressed in radiants) to be used when applying the rotation gate 
+\item{Genome}{the length of the genome (or chromosome), representing a possible solution}
+
+\item{thetaend}{the angle (expressed in radiants) to be used when applying the rotation gate 
+at the end of the iterations
 (default is pi * 0.025, where pi = 3.1415926535)}
 
 \item{pop_mutation_rate_max}{maximum mutation rate to be used when applying the X-Pauli gate, applied 
@@ -51,7 +54,7 @@ to each element of the chromosome (default is 1/(Genome+1))}
 
 \item{mutation_flag}{flag indicating if the mutation gate is to be applied or not (default is TRUE)}
 
-\item{plot}{flag indicating plotting during iterations}
+\item{plotting}{flag indicating plotting during iterations}
 
 \item{verbose}{flag indicating printing fitness during iterations}
 
@@ -102,8 +105,8 @@ popsize = 20
 generation_max = 200
 nvalues_sol = nstrat
 Genome = 150
-thetamax = 3.1415926535 * 0.05
-thetamin = 3.1415926535 * 0.025
+thetainit = 3.1415926535 * 0.05
+thetaend = 3.1415926535 * 0.025
 pop_mutation_rate_max = 1/(popsize + 1)
 pop_mutation_rate_min = 1/(popsize + 1)
 mutation_rate_max = 1/(Genome + 1)
@@ -117,13 +120,15 @@ solution <- QGA(popsize,
                 generation_max,
                 nvalues_sol,
                 Genome,
-                thetamax,
-                thetamin,
+                thetainit,
+                thetaend,
                 pop_mutation_rate_max,
                 pop_mutation_rate_min,
                 mutation_rate_max,
                 mutation_rate_min,
                 mutation_flag,
+                plotting = TRUE,
+                verbose = FALSE,
                 eval_fitness,
                 eval_func_inputs)
 #----------------------

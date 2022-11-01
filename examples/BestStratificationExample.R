@@ -61,11 +61,9 @@ strata <- aggrStrata2(dataset = frame,
                       vett = solution, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
-# [1] 19.75488
+# [1] 13
 iris$stratum <- solution
 table(iris$Species, iris$stratum)
-
-
 
 #-------------------------------
 # Comparison with SamplingStrata
