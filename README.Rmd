@@ -26,6 +26,7 @@ b. traveler salesman problem.
 In the "examples" folder, the corresponding two applications are contained. Once installed the package by executing
 
 ```{r, eval=FALSE}
+devtools::install_github("d4ndo/binaryLogic")
 devtools::install_github("barcaroli/QGA")
 ```
 
