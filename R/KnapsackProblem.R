@@ -29,7 +29,8 @@ KnapsackProblem <- function(solution,
   tot_items <- sum(solution)
   # Penalization
   if (sum(items$weight[solution]) > maxweight) {
-    tot_items <- tot_items * (maxweight / sum(items$weight[solution]))  
+    # tot_items <- tot_items * (maxweight / sum(items$weight[solution]))  
+    tot_items <- 0
   }
   return(tot_items)
 }

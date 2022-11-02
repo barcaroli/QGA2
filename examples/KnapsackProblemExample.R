@@ -18,9 +18,9 @@ maxweight
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 2000
-nvalues_sol = nrow(cities)
-Genome = nrow(cities)
+generation_max = 500
+nvalues_sol = nrow(items)
+Genome = nrow(items)
 thetainit = 3.1415926535 * 0.01
 thetaend = 3.1415926535 * 0.01
 pop_mutation_rate_init = 1/(popsize + 1)
