@@ -35,6 +35,7 @@ In the “examples” folder, the corresponding two applications are
 contained. Once installed the package by executing
 
 ``` r
+devtools::install_github("d4ndo/binaryLogic")
 devtools::install_github("barcaroli/QGA")
 ```
 
