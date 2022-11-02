@@ -24,13 +24,13 @@
 #' 
 KnapsackProblem <- function(solution,
                             eval_func_inputs) {
+  solution <- solution - 1
   items <- eval_func_inputs[[1]]
   maxweight <- eval_func_inputs[[2]]
   tot_items <- sum(solution)
   # Penalization
   if (sum(items$weight[solution]) > maxweight) {
-    # tot_items <- tot_items * (maxweight / sum(items$weight[solution]))  
-    tot_items <- 0
+    tot_items <- tot_items - (sum(items$weight[solution]) - maxweight)  
   }
   return(tot_items)
 }
