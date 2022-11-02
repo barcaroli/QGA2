@@ -399,7 +399,7 @@ QGA <- function(popsize = 20,
     y1 = min(min(res$fitness_average),min(res$fitness_best))
     y2 = max(max(res$fitness_average),max(res$fitness_best))
   
-    if (y1 > 0) {
+    if (y1 >= 0) {
       ymin = y1*0.8
       ymax = y2*1.2
     }

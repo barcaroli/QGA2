@@ -19,7 +19,7 @@ maxweight
 # Set parameters
 popsize = 20
 generation_max = 500
-nvalues_sol = nrow(items)
+nvalues_sol = 2
 Genome = nrow(items)
 thetainit = 3.1415926535 * 0.01
 thetaend = 3.1415926535 * 0.01
@@ -30,7 +30,7 @@ mutation_rate_end = 1/(Genome + 1)
 mutation_flag = FALSE
 eval_fitness = KnapsackProblem
 eval_func_inputs = list(items,
-                        max_weight)
+                        maxweight)
 
 #----------------------
 # Perform optimization
@@ -45,8 +45,8 @@ solution <- QGA(popsize,
                 mutation_rate_init,
                 mutation_rate_end,
                 mutation_flag,
-                plotting = FALSE,
-                verbose = FALSE,
+                plotting = TRUE,
+                verbose = TRUE,
                 eval_fitness,
                 eval_func_inputs)
 
