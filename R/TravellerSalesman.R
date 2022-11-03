@@ -26,7 +26,7 @@ TravellerSalesman <- function(solution,distance) {
   for (i in 2:length(solution)) {
     l = l+distance[solution[i-1], solution[i]]
   }
-  l + distance[solution[1],solution[length(solution)]]
+  l = l + distance[solution[1],solution[length(solution)]]
   penal <- ((nrow(distance)) - length(table(solution)))*sum(distance)/10
   cost <- -(penal+l)
   return(cost)
