@@ -63,7 +63,7 @@ evaluate <- function(solution) {
   for (i in 2:length(solution)) {
     l = l+distance[solution[i-1], solution[i]]
   }
-  l + distance[solution[1],solution[length(solution)]]
+  l = l + distance[solution[1],solution[length(solution)]]
   penal <- ((nrow(distance)) - length(table(solution)))*sum(distance)/10
   cost <- penal+l
   return(cost)
@@ -89,7 +89,7 @@ l = 0.0
 for (i in 2:length(bestSolution)) {
   l = l+distance[bestSolution[i-1], bestSolution[i]]
 }
-l + distance[bestSolution[1],solution[length(bestSolution)]]
+l = l + distance[bestSolution[1],solution[length(bestSolution)]]
 penal <- ((nrow(distance)) - length(table(bestSolution)))*sum(distance)/10
 l
 cities_tsp <- cities[bestSolution,]
