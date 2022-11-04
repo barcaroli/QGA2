@@ -30,7 +30,7 @@ a. BestStratificationExample.R
 b. TravelerSalesmanExample.R
 c. KnapsackProblemExample.R
 
-Once installed the package, by executing
+Once installed the package, after executing
 
 ```{r, eval=FALSE}
 devtools::install_github("barcaroli/QGA")

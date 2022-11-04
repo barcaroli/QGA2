@@ -39,7 +39,7 @@ contained:
 2.  TravelerSalesmanExample.R
 3.  KnapsackProblemExample.R
 
-Once installed the package, by executing
+Once installed the package, after executing
 
 ``` r
 devtools::install_github("barcaroli/QGA")
