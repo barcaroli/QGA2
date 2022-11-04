@@ -19,7 +19,7 @@ maxweight
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 250
+generation_max = 500
 nvalues_sol = 2
 Genome = nrow(items)
 thetainit = 3.1415926535 * 0.05

@@ -13,7 +13,7 @@ Description:
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: yes
-Depends: R (>= 3.5.0), binaryLogic
+Depends: R (>= 3.5.0)
 Suggests: SamplingStrata
 NeedsCompilation: no
 Packaged: 

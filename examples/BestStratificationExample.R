@@ -71,11 +71,11 @@ table(iris$Species, iris$stratum)
 
 #-------------------------------
 # Comparison with SamplingStrata
-# sol <-optimStrata(method = "atomic",
-#                   framesamp = frame,
-#                   nStrata = nstrat,
-#                   errors = cv,
-#                   pops = popsize,
-#                   minnumstr = 1,
-#                   iter = 500)
-# sum(sol$aggr_strata$SOLUZ)
+sol <-optimStrata(method = "atomic",
+                  framesamp = frame,
+                  nStrata = nstrat,
+                  errors = cv,
+                  pops = popsize,
+                  minnumstr = 1,
+                  iter = 500)
+sum(sol$aggr_strata$SOLUZ)

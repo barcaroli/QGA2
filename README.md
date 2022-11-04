@@ -26,23 +26,38 @@ determines the swap between alfa and beta amplitudes of a given qubit.
 The package has been developed in such a way as to permit a complete
 separation between the “engine”, and the particular problem subject to
 combinatorial optimization. So far, three specific problems have been
-implemented:
+implemented, namely:
 
 1.  best stratification of a sampling frame;
 2.  traveler salesman problem;
 3.  knapsack problem.
 
-In the “examples” folder, the corresponding three applications are
-contained.
+In the “examples” folder, the corresponding examples of applications are
+contained:
+
+1.  BestStratificationExample.R
+2.  TravelerSalesmanExample.R
+3.  KnapsackProblemExample.R
 
 Once installed the package, by executing
 
 ``` r
-devtools::install_github("d4ndo/binaryLogic")
 devtools::install_github("barcaroli/QGA")
 ```
 
 they can be run, and their results analyzed.
+
+In particular, QGA can be compared with the traditional genetic
+algorithm.
+
+In the case of the best stratification, QGA is compared with the GA
+implemented in the package “SamplingStrata”. It can be verified that QGA
+converges to a convenient solution moe rapidly than SamplingStrata.
+
+In the other two caes. QGA is compared with the GA implemented in the
+“genalg” package. QGA is more rapidly converging to a good solution in
+the knapsack problem, while the opposite is in the case of the traveler
+salesman.
 
 ## Reference
 

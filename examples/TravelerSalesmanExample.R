@@ -9,13 +9,13 @@ library(QGA)
 #----------------------
 # Prepare data for fitness evaluation
 cities <- read.csv("cities.csv")
-ncities <- 8
+ncities <- 10
 cities <- cities[c(1:ncities),]
 distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 2000
+generation_max = 1000
 nvalues_sol = nrow(cities)
 Genome = nrow(cities)
 thetainit = 3.1415926535 * 0.01
@@ -71,7 +71,7 @@ evaluate <- function(solution) {
 solutionGA <- rbga(stringMin=c(rep(1,nrow(cities))), 
                      stringMax=c(rep(nrow(cities),nrow(cities))),
                      popSize=20, 
-                     iters=2000, 
+                     iters=1000, 
                      elitism=NA, 
                      evalFunc=evaluate)
 plot(solutionGA)
@@ -89,8 +89,8 @@ l = 0.0
 for (i in 2:length(bestSolution)) {
   l = l+distance[bestSolution[i-1], bestSolution[i]]
 }
-l = l + distance[bestSolution[1],solution[length(bestSolution)]]
-penal <- ((nrow(distance)) - length(table(bestSolution)))*sum(distance)/10
+l = l + distance[bestSolution[1],bestSolution[length(bestSolution)]]
+# penal <- ((nrow(distance)) - length(table(bestSolution)))*sum(distance)/10
 l
 cities_tsp <- cities[bestSolution,]
 plot(y~x,data=cities_tsp)
