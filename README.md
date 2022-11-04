@@ -64,4 +64,4 @@ salesman.
 Kuk-Hyun Han and Jong-Hwan Kim, “Genetic quantum algorithm and its
 application to combinatorial optimization problem,” Proceedings of the
 2000 Congress on Evolutionary Computation. CEC00 (Cat. No.00TH8512),
-2000, pp. 1354-1360 vol.2, doi: 10.1109/CEC.2000.870809.
+2000, pp.1354-1360 vol.2, doi: 10.1109/CEC.2000.870809.
