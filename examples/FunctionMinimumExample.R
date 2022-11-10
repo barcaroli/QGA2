@@ -12,33 +12,16 @@ x <- c(1:vals)
 y <- rep(NA,vals)
 for (i in c(1:vals)) {
   y[i] <- (x[i]-vals/2)^2
-  y[i] <- y[i] + runif(1,min=-vals,max=vals)
+  y[i] <- y[i] + runif(1,min=-vals,max=vals) + 1000
 }
 plot(x,y)
 which(y[x]==min(y))
-
-
-#----------------------
-# Fitness evaluation
-
-evaluate <- function(solution,inputs) {
-  n <- inputs[[1]] 
-  y <- inputs[[2]]
-  valuex <- 0
-  for (w in c(1:n)) {
-    valuex <- valuex + solution[w]*2^(n-w) 
-  }
-  valuex <- valuex + 1
-  valuey <- y[valuex]
-  return(-valuey)
-}
-# solution <- c(0,1,1,1,1,1)
-# evaluate(solution,n)
+y[which(y[x]==min(y))]
 
 
 # Set parameters
 popsize = 20
-generation_max = 100
+generation_max = 20
 nvalues_sol = vals
 Genome = 1
 thetainit = 3.1415926535 * 0.05
@@ -73,38 +56,34 @@ solution <- QGA(popsize,
 
 #----------------------
 # Analyze results
-solution <- solution - 1
-sum(solution)
-sum(items$weight[solution])
-maxweight
+solution
+y[solution]
+which(y[x]==min(y))
+y[which(y[x]==min(y))]
 
 #-----------------------------------------
 # Compare with classical genetic algorithm
 library(genalg)
 evaluate <- function(solution) {
-  tot_items <- sum(solution)
-  # Penalization
-  if (sum(items$weight[solution]) > maxweight) {
-    tot_items <- tot_items - (sum(items$weight[solution]) - maxweight)  
-  }
-  return(-tot_items)
+  solution <- round(solution)
+  value <- y[solution]
+  return(value)
 }
-rbga.results <- rbga.bin(size=nrow(items),
-         suggestions=NULL,
-         popSize=20, 
-         iters=1000, 
-         elitism=NA, 
-         zeroToOneRatio=round(maxweight*10/sum(items$weight)),
-         evalFunc=evaluate)
-plot(rbga.results)
-filter = rbga.results$evaluations == min(rbga.results$evaluations)
-bestObjectCount = sum(rep(1, rbga.results$popSize)[filter])
+solutionGA <- rbga(stringMin=c(1), 
+                   stringMax=c(vals),
+                   popSize=20, 
+                   iters=20, 
+                   elitism=NA, 
+                   evalFunc=evaluate)
+plot(solutionGA)
+filter = solutionGA$evaluations == min(solutionGA$evaluations)
+bestObjectCount = sum(rep(1, solutionGA$popSize)[filter])
 if (bestObjectCount > 1) {
-  bestSolution = rbga.results$population[filter, ][1, 
-  ]
+  bestSolution = solutionGA$population[filter, ][1]
 } else {
-  bestSolution = rbga.results$population[filter, ]
+  bestSolution = solutionGA$population[filter, ]
 }
-sum(bestSolution)
-sum(items$weight[bestSolution])
-maxweight
+bestSolution = round(bestSolution)
+bestSolution
+y[bestSolution]
+
