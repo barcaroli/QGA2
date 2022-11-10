@@ -15,7 +15,7 @@
 #' @param generation_max the number of iterations to be performed
 #' (default is 200)
 #' @param Genome the length of the genome (or chromosome), representing a possible solution 
-#' @param nvalues_sol the number of possible integer values contained in each element of the solution 
+#' @param nvalues_sol the number of possible integer values contained in each element (gene) of the solution 
 #' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
 #' when starting the iterations 
 #' (default is pi * 0.05, where pi = 3.1415926535)
@@ -38,7 +38,7 @@
 #' 
 #' @export
 #' 
-#' @return A numeric vector giving the best solution obtained by the QGA
+#' @value A numeric vector giving the best solution obtained by the QGA
 #' 
 #' @examples 
 #' #----------------------
@@ -130,8 +130,8 @@ QGA <- function(popsize = 20,
   while (nvalues_sol > 2^n) {
     n = n+1
   }
-  Genome_el = n 
-  genomeLength <- Genome * Genome_el 
+  geneLength = n 
+  genomeLength <- Genome * geneLength 
   #---------------------
   #  WORKING VARIABLES                                  
   #---------------------
@@ -379,14 +379,14 @@ QGA <- function(popsize = 20,
   #-----------------  
 
   repair <- function(chromosome) {
-    diff = 2^Genome_el - nvalues_sol
-    acceptable_values <- c(1:(2^Genome_el - diff))
+    diff = 2^geneLength - nvalues_sol
+    acceptable_values <- c(1:(2^geneLength - diff))
     for (i in c(1:popsize)) {
-      solution1 <- array(chromosome[i,],c(Genome_el,Genome))
+      solution1 <- array(chromosome[i,],c(geneLength,Genome))
       solution <- c(rep(0,Genome))
       for (x in c(1:Genome)) {
-        for (y in c(1:Genome_el)) {
-          solution[x] <- solution[x] + solution1[y,x]*2^(Genome_el - y) 
+        for (y in c(1:geneLength)) {
+          solution[x] <- solution[x] + solution1[y,x]*2^(geneLength - y) 
         }
       }
       solution <- solution + 1
@@ -395,11 +395,11 @@ QGA <- function(popsize = 20,
       if (max(solution) > nvalues_sol) { 
         solution[!(solution %in% acceptable_values)] <- solution[!(solution %in% acceptable_values)] - diff
       }
-      a = array(c(1:genomeLength),c(Genome_el,Genome))
+      a = array(c(1:genomeLength),c(geneLength,Genome))
       for (x in c(1:Genome)) {
         y1 = a[1,x]
-        y2 = a[Genome_el,x]
-        chromosome[i,c(y1:y2)] <- as.binary(solution[x]-1,n=Genome_el)
+        y2 = a[geneLength,x]
+        chromosome[i,c(y1:y2)] <- as.binary(solution[x]-1,n=geneLength)
       }
     }  
     return(chromosome)
@@ -442,7 +442,7 @@ QGA <- function(popsize = 20,
                        best_chromosome,
                        popsize,
                        Genome,
-                       Genome_el,
+                       geneLength,
                        nvalues_sol,
                        generation,
                        eval_fitness,
@@ -453,11 +453,11 @@ QGA <- function(popsize = 20,
     fitness_max <- -999999999
     the_best_chromosome <- 0
     for (i in c(1:popsize)) {
-      solution1 <- array(chromosome[i,],c(Genome_el,Genome))
+      solution1 <- array(chromosome[i,],c(geneLength,Genome))
       solution <- c(rep(0,Genome))
       for (x in c(1:Genome)) {
-        for (y in c(1:Genome_el)) {
-          solution[x] <- solution[x] + solution1[y,x]*2^(Genome_el - y) 
+        for (y in c(1:geneLength)) {
+          solution[x] <- solution[x] + solution1[y,x]*2^(geneLength - y) 
         }
       }
       solution <- solution + 1
@@ -500,7 +500,7 @@ QGA <- function(popsize = 20,
                     best_chromosome,
                     popsize,
                     Genome,
-                    Genome_el,
+                    geneLength,
                     nvalues_sol,
                     generation,
                     eval_fitness,
@@ -557,7 +557,7 @@ QGA <- function(popsize = 20,
                       best_chromosome,
                       popsize,
                       Genome,
-                      Genome_el,
+                      geneLength,
                       nvalues_sol,
                       generation,
                       eval_fitness,
@@ -579,11 +579,11 @@ QGA <- function(popsize = 20,
   if (verbose == FALSE) close(pb)
   cat("\n *** Best fitness: ",fitness_best)
   plot_Output(res)
-  solution1 <- array(solution_best,c(Genome_el,Genome))
+  solution1 <- array(solution_best,c(geneLength,Genome))
   solution <- c(rep(0,Genome))
   for (x in c(1:Genome)) {
-    for (y in c(1:Genome_el)) {
-      solution[x] <- solution[x] + solution1[y,x]*2^(Genome_el - y) 
+    for (y in c(1:geneLength)) {
+      solution[x] <- solution[x] + solution1[y,x]*2^(geneLength - y) 
     }
   }
   solution <- solution + 1

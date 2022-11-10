@@ -9,15 +9,15 @@ TravellerSalesman(solution, distance)
 \arguments{
 \item{solution}{the solution to be evaluated}
 
-\item{eval_func_inputs}{specific inputs for best stratification 
-(list with sampling frame and precision constraints)}
+\item{eval_func_inputs}{specific input for the Traveler Salesman Problem
+(matrix of the distances between the cities)}
 }
 \description{
 Fitness evaluation to be used for the optimization of a Traveller Salesman Problem
 }
 \details{
 This function is the one that performs the evaluation of the fitness in the case of 
-the optimization of a Traveller Salesman Problem.
+the optimization of a Traveler Salesman Problem.
 The function takes one of the solutions considered at the k-th iteration of the Quantum
 Genetic Algorithm, and determines the minimum sample size required to
 be compliant with precision constraints on the target variables.

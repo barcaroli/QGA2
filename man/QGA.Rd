@@ -29,7 +29,7 @@ QGA(
 \item{generation_max}{the number of iterations to be performed
 (default is 200)}
 
-\item{nvalues_sol}{the number of possible integer values contained in each element of the solution}
+\item{nvalues_sol}{the number of possible integer values contained in each element (gene) of the solution}
 
 \item{Genome}{the length of the genome (or chromosome), representing a possible solution}
 
@@ -62,9 +62,6 @@ to each element of the chromosome (default is 1/(Genome+1))}
 \item{eval_fitness}{name of the function that will be used to evaluate the fitness of each solution}
 
 \item{eval_func_inputs}{specific inputs required by the eval_fitness function}
-}
-\value{
-A numeric vector giving the best solution obtained by the QGA
 }
 \description{
 Main function to execute a Quantum Genetic Algorithm

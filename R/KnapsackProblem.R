@@ -19,6 +19,8 @@
 #' @param eval_func_inputs specific inputs for knapsack problem
 #' (list with list of items with corresponding weights and allowed total weight) 
 #' 
+#' @value the total number of items the knapsack
+#' 
 #' @export
 #'  
 #' 
