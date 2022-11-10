@@ -12,6 +12,9 @@ TravellerSalesman(solution, distance)
 \item{eval_func_inputs}{specific input for the Traveler Salesman Problem
 (matrix of the distances between the cities)}
 }
+\value{
+the sum of distances
+}
 \description{
 Fitness evaluation to be used for the optimization of a Traveller Salesman Problem
 }

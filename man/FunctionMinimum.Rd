@@ -4,14 +4,16 @@
 \alias{FunctionMinimum}
 \title{Function Minimum fitness evaluation function}
 \usage{
-FunctionMinimum(solution, inputs)
+FunctionMinimum(solution, y)
 }
 \arguments{
 \item{solution}{the solution to be evaluated}
 
-\item{eval_func_inputs}{specific inputs for the evaluation function
-(n: the number of digits with required by the integer numbers of the x variable,
- y: the vector of values of the y variable)}
+\item{eval_func_inputs}{specific input for the evaluation function
+(y: the vector of values of the y variable)}
+}
+\value{
+the value of the y variable
 }
 \description{
 Fitness evaluation to be used for finding the minimum of a function
@@ -19,9 +21,6 @@ Fitness evaluation to be used for finding the minimum of a function
 \details{
 This function is the one that performs the evaluation of the fitness in the case of 
 searching the minimum of a function.
-The function takes one of the solutions considered at the k-th iteration of the Quantum
-Genetic Algorithm, and 
-
-1. convert the vector of binary values representing the current solution (value of the x);
-2. calculates
+The function is trivial: takes one of the solutions considered at the k-th iteration 
+(the value of the X), and reports the value of the y.
 }

@@ -16,12 +16,7 @@ for (i in c(1:vals)) {
 }
 plot(x,y)
 which(y[x]==min(y))
-# Calculate the number of (qu)bits necessary for each element in the genome/chromosome
-n = 0
-while (vals > 2^n) {
-  n = n+1
-}
-n
+
 
 #----------------------
 # Fitness evaluation
@@ -54,7 +49,7 @@ mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
 mutation_flag = TRUE
 eval_fitness = FunctionMinimum
-eval_func_inputs = list(y,n)
+eval_func_inputs = y
 plotting = TRUE
 verbose = TRUE
 

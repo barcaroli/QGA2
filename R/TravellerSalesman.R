@@ -18,7 +18,7 @@
 #' @param eval_func_inputs specific input for the Traveler Salesman Problem
 #' (matrix of the distances between the cities) 
 #' 
-#' @value 
+#' @return the sum of distances  
 #' 
 #' @export
 #'  

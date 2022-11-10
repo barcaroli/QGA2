@@ -38,7 +38,7 @@
 #' 
 #' @export
 #' 
-#' @value A numeric vector giving the best solution obtained by the QGA
+#' @return A numeric vector giving the best solution obtained by the QGA
 #' 
 #' @examples 
 #' #----------------------

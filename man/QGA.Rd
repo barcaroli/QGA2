@@ -63,6 +63,9 @@ to each element of the chromosome (default is 1/(Genome+1))}
 
 \item{eval_func_inputs}{specific inputs required by the eval_fitness function}
 }
+\value{
+A numeric vector giving the best solution obtained by the QGA
+}
 \description{
 Main function to execute a Quantum Genetic Algorithm
 }

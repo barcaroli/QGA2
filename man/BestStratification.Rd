@@ -12,6 +12,10 @@ BestStratification(solution, eval_func_inputs)
 \item{eval_func_inputs}{specific inputs for best stratification 
 (list with sampling frame and precision constraints)}
 }
+\value{
+cost of the solution expressed in terms of the sample size required to satisfy 
+the precision constraints
+}
 \description{
 Fitness evaluation to be used for the optimization of a sampling frame stratification
 }

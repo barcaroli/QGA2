@@ -12,6 +12,9 @@ KnapsackProblem(solution, eval_func_inputs)
 \item{eval_func_inputs}{specific inputs for knapsack problem
 (list with list of items with corresponding weights and allowed total weight)}
 }
+\value{
+the total number of items the knapsack
+}
 \description{
 Fitness evaluation to be used for the optimization of the knapsack problem
 }
