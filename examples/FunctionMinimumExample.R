@@ -16,11 +16,19 @@ for (i in c(1:vals)) {
 }
 plot(x,y)
 which(y[x]==min(y))
+# Calculate the number of (qu)bits necessary for each element in the genome/chromosome
+n = 0
+while (vals > 2^n) {
+  n = n+1
+}
+n
 
 #----------------------
 # Fitness evaluation
 
-evaluate <- function(solution,n) {
+evaluate <- function(solution,inputs) {
+  n <- inputs[[1]] 
+  y <- inputs[[2]]
   valuex <- 0
   for (w in c(1:n)) {
     valuex <- valuex + solution[w]*2^(n-w) 
@@ -28,10 +36,6 @@ evaluate <- function(solution,n) {
   valuex <- valuex + 1
   valuey <- y[valuex]
   return(-valuey)
-}
-n = 0
-while (vals > 2^n) {
-  n = n+1
 }
 # solution <- c(0,1,1,1,1,1)
 # evaluate(solution,n)
@@ -49,8 +53,8 @@ pop_mutation_rate_end = 1/(popsize + 1)
 mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
 mutation_flag = TRUE
-eval_fitness = evaluate
-eval_func_inputs = n
+eval_fitness = FunctionMinimum
+eval_func_inputs = list(y,n)
 plotting = TRUE
 verbose = TRUE
 
