@@ -18,7 +18,11 @@ plot(x,y)
 which(y[x]==min(y))
 y[which(y[x]==min(y))]
 
-
+evaluate1 <- function(solution,y) {
+  solution <- round(solution)
+  value <- y[solution]
+  return(-value)
+}
 # Set parameters
 popsize = 20
 generation_max = 20
@@ -31,7 +35,7 @@ pop_mutation_rate_end = 1/(popsize + 1)
 mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
 mutation_flag = TRUE
-eval_fitness = FunctionMinimum
+eval_fitness = evaluate1
 eval_func_inputs = y
 plotting = TRUE
 verbose = TRUE
@@ -64,7 +68,7 @@ y[which(y[x]==min(y))]
 #-----------------------------------------
 # Compare with classical genetic algorithm
 library(genalg)
-evaluate <- function(solution) {
+evaluate2 <- function(solution) {
   solution <- round(solution)
   value <- y[solution]
   return(value)
@@ -74,7 +78,7 @@ solutionGA <- rbga(stringMin=c(1),
                    popSize=20, 
                    iters=20, 
                    elitism=NA, 
-                   evalFunc=evaluate)
+                   evalFunc=evaluate2)
 plot(solutionGA)
 filter = solutionGA$evaluations == min(solutionGA$evaluations)
 bestObjectCount = sum(rep(1, solutionGA$popSize)[filter])
