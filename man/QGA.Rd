@@ -76,45 +76,53 @@ problem to be optmized.
 }
 \examples{
 #----------------------
-library(SamplingStrata)
 library(QGA)
 #----------------------
+
+#----------------------------------------
+# Fitness evaluation for Knapsack Problem
+KnapsackProblem <- function(solution,
+                            eval_func_inputs) {
+  solution <- solution - 1
+  items <- eval_func_inputs[[1]]
+  maxweight <- eval_func_inputs[[2]]
+  tot_items <- sum(solution)
+  # Penalization
+  if (sum(items$weight[solution]) > maxweight) {
+    tot_items <- tot_items - (sum(items$weight[solution]) - maxweight)  
+  }
+  return(tot_items)
+}
+
+#----------------------------------------
 # Prepare data for fitness evaluation
-data(iris)
-iris$id <- c(1:nrow(iris))
-iris$dom <- 1
-library(SamplingStrata)
-frame <- buildFrameDF(
-  df = iris,
-  id = "id",
-  domainvalue = "dom",
-  X = c("id"),
-  Y = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
-)
-cv <- as.data.frame(list(
-  DOM = "DOM1",
-  CV1 = 0.03,
-  CV2 = 0.03,
-  CV3 = 0.03,
-  CV4 = 0.03,
-  domainvalue = 1
-))
-nstrat = 3
+items <- as.data.frame(list(Item = paste0("item",c(1:300)),
+                            weight = rep(NA,300)))
+set.seed(1234)
+items$weight <- rnorm(300,mean=50,sd=20)
+hist(items$weight)
+sum(items$weight)
+maxweight = sum(items$weight) / 2
+maxweight
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 200
-nvalues_sol = nstrat
-Genome = 150
+generation_max = 250
+nvalues_sol = 2
+Genome = nrow(items)
 thetainit = 3.1415926535 * 0.05
-thetaend = 3.1415926535 * 0.025
+thetaend = 3.1415926535 * 0.001
 pop_mutation_rate_init = 1/(popsize + 1)
 pop_mutation_rate_end = 1/(popsize + 1)
 mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
-mutation_flag = FALSE
-eval_fitness = best_stratification
-eval_func_inputs = list(frame, cv)
+mutation_flag = TRUE
+eval_fitness = KnapsackProblem
+eval_func_inputs = list(items,
+                        maxweight)
+plotting = TRUE
+verbose = FALSE
+
 #----------------------
 # Perform optimization
 solution <- QGA(popsize,
@@ -128,18 +136,16 @@ solution <- QGA(popsize,
                 mutation_rate_init,
                 mutation_rate_end,
                 mutation_flag,
-                plotting = TRUE,
-                verbose = FALSE,
+                plotting,
+                verbose,
                 eval_fitness,
                 eval_func_inputs)
+
 #----------------------
 # Analyze results
-table(solution)
-strata <- aggrStrata2(dataset = frame, 
-                      vett = solution, 
-                      dominio = 1)
-sum(bethel(strata, cv, realAllocation = TRUE))
-iris$stratum <- solution
-table(iris$Species, iris$stratum)
+solution <- solution - 1
+sum(solution)
+sum(items$weight[solution])
+maxweight
 
 }
