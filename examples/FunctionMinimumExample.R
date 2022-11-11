@@ -6,6 +6,14 @@
 #----------------------
 library(QGA)
 #----------------------
+
+#----------------------
+# Fitness evaluation
+evaluate1 <- function(solution,y) {
+  value <- y[solution]
+  return(-value)
+}
+
 # Prepare data for fitness evaluation
 vals <- 64
 x <- c(1:vals)
@@ -18,11 +26,8 @@ plot(x,y)
 which(y[x]==min(y))
 y[which(y[x]==min(y))]
 
-evaluate1 <- function(solution,y) {
-  solution <- round(solution)
-  value <- y[solution]
-  return(-value)
-}
+
+#----------------------
 # Set parameters
 popsize = 20
 generation_max = 20

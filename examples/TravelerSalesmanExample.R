@@ -6,12 +6,29 @@
 #----------------------
 library(QGA)
 #----------------------
+
+#-------------------------------------------------
+# Fitness evaluation for Traveler Salesman Problem
+#-------------------------------------------------
+TravellerSalesman <- function(solution,distance) {
+  l = 0.0  
+  for (i in 2:length(solution)) {
+    l = l+distance[solution[i-1], solution[i]]
+  }
+  l = l + distance[solution[1],solution[length(solution)]]
+  penal <- ((nrow(distance)) - length(table(solution)))*sum(distance)/10
+  cost <- -(penal+l)
+  return(cost)
+}
+
+#-------------------------------------------------
 # Prepare data for fitness evaluation
-cities <- read.csv("cities.csv")
+cities <- read.csv(".\\examples\\cities.csv")
 ncities <- 8
 cities <- cities[c(1:ncities),]
 distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
+
 # Set parameters
 popsize = 20
 generation_max = 1000
@@ -26,6 +43,7 @@ mutation_rate_end = 1/(Genome + 1)
 mutation_flag = FALSE
 eval_fitness = TravellerSalesman
 eval_func_inputs = distance
+
 #----------------------
 # Perform optimization
 solutionQGA <- QGA(popsize,
@@ -43,6 +61,7 @@ solutionQGA <- QGA(popsize,
                 verbose = FALSE,
                 eval_fitness,
                 eval_func_inputs)
+
 #----------------------
 # Analyze results
 cities$city[solutionQGA]
@@ -89,7 +108,6 @@ for (i in 2:length(bestSolution)) {
   l = l+distance[bestSolution[i-1], bestSolution[i]]
 }
 l = l + distance[bestSolution[1],bestSolution[length(bestSolution)]]
-# penal <- ((nrow(distance)) - length(table(bestSolution)))*sum(distance)/10
 l
 cities_tsp <- cities[bestSolution,]
 plot(y~x,data=cities_tsp)

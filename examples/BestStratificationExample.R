@@ -6,12 +6,11 @@
 #----------------------
 require(SamplingStrata)
 library(QGA)
-#----------------------
+#-------------------------------------------
 # Fitness evaluation for best stratification
-BestStratification2 <- function(solution,
+#-------------------------------------------
+BestStratification <- function(solution,
                                eval_func_inputs) {
-  require(SamplingStrata)
-  nstrat <- length(table(solution))
   frame <- eval_func_inputs[[1]]
   cv <- eval_func_inputs[[2]]
   strata = SamplingStrata::aggrStrata2(dataset=frame,
@@ -22,6 +21,7 @@ BestStratification2 <- function(solution,
   return(fitness)
 }
 
+#-------------------------------------------
 # Prepare data for fitness evaluation
 data(iris)
 iris$id <- c(1:nrow(iris))
@@ -42,12 +42,13 @@ cv <- as.data.frame(list(
   domainvalue = 1
 ))
 nstrat = 3
+
 #----------------------
 # Set parameters
 popsize = 20
 generation_max = 100
 nvalues_sol = nstrat
-Genome = 150
+Genome = nrow(iris)
 thetainit = 3.1415926535 * 0.05
 thetaend = 3.1415926535 * 0.025
 pop_mutation_rate_init = 1/(popsize + 1)
@@ -55,8 +56,9 @@ pop_mutation_rate_end = 1/(popsize + 1)
 mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
 mutation_flag = TRUE
-eval_fitness = BestStratification2
+eval_fitness = BestStratification
 eval_func_inputs = list(frame, cv)
+
 #----------------------
 # Perform optimization
 solution <- QGA(popsize,

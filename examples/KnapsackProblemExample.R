@@ -6,6 +6,25 @@
 #----------------------
 library(QGA)
 #----------------------
+
+#----------------------------------------
+# Fitness evaluation for Knapsack Problem
+#----------------------------------------
+KnapsackProblem <- function(solution,
+                            eval_func_inputs) {
+  solution <- solution - 1
+  items <- eval_func_inputs[[1]]
+  maxweight <- eval_func_inputs[[2]]
+  tot_items <- sum(solution)
+  # Penalization
+  if (sum(items$weight[solution]) > maxweight) {
+    tot_items <- tot_items - (sum(items$weight[solution]) - maxweight)  
+  }
+  return(tot_items)
+}
+
+
+#----------------------------------------
 # Prepare data for fitness evaluation
 items <- as.data.frame(list(Item = paste0("item",c(1:300)),
                             weight = rep(NA,300)))
@@ -19,7 +38,7 @@ maxweight
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 500
+generation_max = 250
 nvalues_sol = 2
 Genome = nrow(items)
 thetainit = 3.1415926535 * 0.05
@@ -90,3 +109,4 @@ if (bestObjectCount > 1) {
 sum(bestSolution)
 sum(items$weight[bestSolution])
 maxweight
+
