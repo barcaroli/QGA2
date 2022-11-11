@@ -22,13 +22,15 @@ The package has been developed in such a way as to permit a complete separation 
 
 a. best stratification of a sampling frame;
 b. traveler salesman problem;
-c. knapsack problem.
+c. knapsack problem;
+d. minimum of a function.
 
-In the "examples" folder, the corresponding examples of applications are contained:
+In the "inst/docs" folder, the corresponding examples of applications are contained:
 
 a. BestStratificationExample.R
 b. TravelerSalesmanExample.R
 c. KnapsackProblemExample.R
+d. FunctionMinimumExample.R
 
 Once installed the package, after executing
 
@@ -40,9 +42,9 @@ they can be run, and their results analyzed.
 
 In particular, QGA can be compared with the traditional genetic algorithm. 
 
-In the case of the best stratification, QGA is compared with the GA implemented in the package "SamplingStrata". It can be verified that QGA converges to a convenient solution moe rapidly than SamplingStrata.
+In the case of the best stratification, QGA is compared with the GA implemented in the package "SamplingStrata". It can be verified that QGA converges to a convenient solution more rapidly than SamplingStrata.
 
-In the other two caes. QGA is compared with the GA implemented in the "genalg" package. QGA is more rapidly converging to a good solution in the knapsack problem, while the opposite is in the case of the traveler salesman.
+In the other cases, QGA is compared with the GA implemented in the "genalg" package. QGA is more rapidly converging to a good solution in the knapsack problem, while the opposite is in the case of the traveler salesman.
 
 
 ## Reference

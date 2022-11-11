@@ -30,14 +30,16 @@ implemented, namely:
 
 1.  best stratification of a sampling frame;
 2.  traveler salesman problem;
-3.  knapsack problem.
+3.  knapsack problem;
+4.  minimum of a function.
 
-In the “examples” folder, the corresponding examples of applications are
-contained:
+In the “inst/docs” folder, the corresponding examples of applications
+are contained:
 
 1.  BestStratificationExample.R
 2.  TravelerSalesmanExample.R
 3.  KnapsackProblemExample.R
+4.  FunctionMinimumExample.R
 
 Once installed the package, after executing
 
@@ -52,9 +54,9 @@ algorithm.
 
 In the case of the best stratification, QGA is compared with the GA
 implemented in the package “SamplingStrata”. It can be verified that QGA
-converges to a convenient solution moe rapidly than SamplingStrata.
+converges to a convenient solution more rapidly than SamplingStrata.
 
-In the other two caes. QGA is compared with the GA implemented in the
+In the other cases, QGA is compared with the GA implemented in the
 “genalg” package. QGA is more rapidly converging to a good solution in
 the knapsack problem, while the opposite is in the case of the traveler
 salesman.
