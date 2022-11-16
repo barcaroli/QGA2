@@ -15,12 +15,12 @@ The evolution at each iteration is oriented by the application of two
 quantum gates to the amplitudes of the qubits:
 
 1.  a rotation gate (always);
-2.  an X-Pauli gate (optionally).
+2.  a Pauli-X gate (optionally).
 
 The rotation is based on the theta angle values: higher values allow a
 quicker evolution, and lower values avoid local maxima.
 
-The X-Pauli gate is equivalent to the classical mutation operator and
+The Pauli-X gate is equivalent to the classical mutation operator and
 determines the swap between alfa and beta amplitudes of a given qubit.
 
 The package has been developed in such a way as to permit a complete
@@ -30,8 +30,7 @@ implemented, namely:
 
 1.  best stratification of a sampling frame;
 2.  traveler salesman problem;
-3.  knapsack problem;
-4.  minimum of a function.
+3.  knapsack problem.
 
 In the “inst/docs” folder, the corresponding examples of applications
 are contained:
@@ -39,7 +38,6 @@ are contained:
 1.  BestStratificationExample.R
 2.  TravelerSalesmanExample.R
 3.  KnapsackProblemExample.R
-4.  FunctionMinimumExample.R
 
 Once installed the package, after executing
 
