@@ -46,7 +46,7 @@ nstrat = 3
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 100
+generation_max = 500
 nvalues_sol = nstrat
 Genome = nrow(iris)
 thetainit = 3.1415926535 * 0.05
@@ -61,7 +61,8 @@ eval_func_inputs = list(frame, cv)
 
 #----------------------
 # Perform optimization
-solution <- QGA(popsize,
+set.seed(1234)
+solutionQGA <- QGA(popsize,
                 generation_max,
                 nvalues_sol,
                 Genome,
@@ -78,21 +79,60 @@ solution <- QGA(popsize,
                 eval_func_inputs)
 #----------------------
 # Analyze results
-table(solution)
+table(solutionQGA)
 strata <- aggrStrata2(dataset = frame, 
-                      vett = solution, 
+                      vett = solutionQGA, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
-iris$stratum <- solution
+iris$stratum <- solutionQGA
 table(iris$Species, iris$stratum)
 
 #-------------------------------
 # Comparison with SamplingStrata
-sol <-optimStrata(method = "atomic",
+set.seed(1234)
+solution_SamplingStrata <-optimStrata(method = "atomic",
                   framesamp = frame,
                   nStrata = nstrat,
                   errors = cv,
                   pops = popsize,
                   minnumstr = 1,
-                  iter = 500)
-sum(sol$aggr_strata$SOLUZ)
+                  iter = 1500)
+sum(solution_SamplingStrata$aggr_strata$SOLUZ)
+iris$stratum <- solution_SamplingStrata$framenew$LABEL
+table(iris$Species, iris$stratum)
+
+#-------------------------------
+# Comparison with genalg
+library(genalg)
+evaluate <- function(solution) {
+  solution <- round(solution)
+  strata = SamplingStrata::aggrStrata2(dataset=frame,
+                                       model=NULL,
+                                       vett=solution,
+                                       dominio=1)
+  fitness <- sum(SamplingStrata::bethel(strata, cv, realAllocation = TRUE))
+  return(fitness)
+}
+solution_genalg <- rbga(stringMin=c(rep(1,nrow(iris))), 
+                   stringMax=c(rep(nstrat,nrow(iris))),
+                   popSize=20, 
+                   iters=500, 
+                   elitism=NA, 
+                   evalFunc=evaluate)
+plot(solution_genalg)
+filter = solution_genalg$evaluations == min(solution_genalg$evaluations)
+bestObjectCount = sum(rep(1, solution_genalg$popSize)[filter])
+if (bestObjectCount > 1) {
+  bestSolution = solution_genalg$population[filter, ][1, 
+  ]
+} else {
+  bestSolution = solution_genalg$population[filter, ]
+}
+bestSolution <- round(bestSolution)
+strata <- aggrStrata2(dataset = frame, 
+                      vett = bestSolution, 
+                      dominio = 1)
+sum(bethel(strata, cv, realAllocation = TRUE))
+iris$stratum <- bestSolution
+table(iris$Species, iris$stratum)
+
