@@ -46,7 +46,7 @@ nstrat = 3
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 500
+generation_max = 1000
 nvalues_sol = nstrat
 Genome = nrow(iris)
 thetainit = 3.1415926535 * 0.05
@@ -84,8 +84,13 @@ strata <- aggrStrata2(dataset = frame,
                       vett = solutionQGA, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
+# 1] 19.75488
 iris$stratum <- solutionQGA
 table(iris$Species, iris$stratum)
+#             1  2  3
+# setosa      0 50  0
+# versicolor 48  0  2
+# virginica   4  0 46
 
 #-------------------------------
 # Comparison with SamplingStrata
@@ -96,11 +101,15 @@ solution_SamplingStrata <-optimStrata(method = "atomic",
                   errors = cv,
                   pops = popsize,
                   minnumstr = 1,
-                  iter = 1500)
+                  iter = 1000)
 sum(solution_SamplingStrata$aggr_strata$SOLUZ)
+# [1] 21.71959
 iris$stratum <- solution_SamplingStrata$framenew$LABEL
 table(iris$Species, iris$stratum)
-
+#             1  2  3
+# setosa      6  5 39
+# versicolor 40  3  7
+# virginica   4 41  5
 #-------------------------------
 # Comparison with genalg
 library(genalg)
@@ -116,7 +125,7 @@ evaluate <- function(solution) {
 solution_genalg <- rbga(stringMin=c(rep(1,nrow(iris))), 
                    stringMax=c(rep(nstrat,nrow(iris))),
                    popSize=20, 
-                   iters=500, 
+                   iters=1000, 
                    elitism=NA, 
                    evalFunc=evaluate)
 plot(solution_genalg)
@@ -133,6 +142,11 @@ strata <- aggrStrata2(dataset = frame,
                       vett = bestSolution, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
+# [1] 22.39341
 iris$stratum <- bestSolution
 table(iris$Species, iris$stratum)
-
+#             1  2  3
+# setosa      0  0 50
+# versicolor  0 50  0
+# virginica  34 16  0
+save.image("run_best_stratification.RData")

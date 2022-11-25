@@ -228,7 +228,10 @@ QGA <- function(popsize = 20,
     for (i in c(1:popsize)) {
       if (sum(chromosome[i, ] != solution_best) != 0) {
         for (j in c(1:genomeLength)) {
+          # Han-Kim lookup table
+          # f(x) > f(b) FALSE
           if (fitness[i] < fitness[best_chromosome[generation]]) {
+            # x = 0 b = 1
             if (chromosome[i, j] == 0 & chromosome[best_chromosome[generation], j] == 1) {
               if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
                 rot[1, 1] <- cos(theta)
@@ -251,6 +254,7 @@ QGA <- function(popsize = 20,
                 q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
               }
             }
+            # x = 1 b = 0
             if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 0) {
               if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
                 rot[1, 1] <- cos(-theta)
@@ -274,7 +278,9 @@ QGA <- function(popsize = 20,
               }
             }
           }
+          # f(x) > f(b) TRUE
           if (fitness[i] >= fitness[best_chromosome[generation]]) {
+            # x = 0 b = 1
             if (chromosome[i, j] == 0 & chromosome[best_chromosome[generation], j] == 1) {
               if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
                 rot[1, 1] <- cos(-theta)
@@ -297,6 +303,7 @@ QGA <- function(popsize = 20,
                 q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
               }
             }
+            # x = 1 b = 0
             if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 0) {
               if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
                 rot[1, 1] <- cos(theta)
@@ -425,10 +432,14 @@ QGA <- function(popsize = 20,
       ymin = y1*0.8
       ymax = y2*1.2
     }
+    if (y1 < 0 & y2 < 0) {
+      ymin = -y1*1.2
+      ymax = -y2*0.8
+    }   
     
-    if (y1 < 0 & (abs(y1) > abs(y2))) {
+    if (y1 < 0 & y2 > 0) {
       ymin = y1*1.2
-      ymax = y2*0.8
+      ymax = y2*1.2
     }
   
     plot(fitness_average ~ generation,
