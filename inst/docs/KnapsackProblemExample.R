@@ -54,8 +54,7 @@ solution <- QGA(popsize = 20,
                 plotting = FALSE,
                 verbose = FALSE,
                 eval_fitness = KnapsackProblem,
-                eval_func_inputs = list(items,
-                                        maxweight))
+                eval_func_inputs = list(items,maxweight))
 
 #----------------------
 # Analyze results
