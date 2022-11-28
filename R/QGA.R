@@ -116,23 +116,31 @@
 #' maxweight
 #' 
  
-
-
 QGA <- function(popsize = 20,  
                 generation_max = 200,
                 nvalues_sol,
                 Genome,
                 thetainit = 3.1415926535 * 0.05,
                 thetaend = 3.1415926535 * 0.025,
-                pop_mutation_rate_init = 1/(popsize+1),
-                pop_mutation_rate_end = 1/(popsize+1),
-                mutation_rate_init = 1/(Genome+1),
-                mutation_rate_end = 1/(Genome+1),
+                pop_mutation_rate_init,
+                pop_mutation_rate_end,
+                mutation_rate_init,
+                mutation_rate_end,
                 mutation_flag = TRUE,
                 plotting = TRUE,
                 verbose = TRUE,
                 eval_fitness,
                 eval_func_inputs) {
+  # check
+  if (is.null(nvalues_sol)) stop("nvalues_sol parameter value missing!")
+  if (is.null(Genome)) stop("Genome parameter value missing!")
+  
+  # default values
+  if (is.null(pop_mutation_rate_init)) pop_mutation_rate_init = 1/(popsize+1)
+  if (is.null(pop_mutation_rate_end)) pop_mutation_rate_end = 1/(popsize+1)
+  if (is.null(mutation_rate_init)) mutation_rate_init = 1/(Genome+1)
+  if (is.null(mutation_rate_end)) mutation_rate_end = 1/(Genome+1)
+  
   # Calculate the number of (qu)bits necessary for each element in the genome/chromosome
   n = 0
   while (nvalues_sol > 2^n) {

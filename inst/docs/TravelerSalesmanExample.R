@@ -30,37 +30,37 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
 
 # Set parameters
-popsize = 20
-generation_max = 1000
-nvalues_sol = nrow(cities)
-Genome = nrow(cities)
-thetainit = 3.1415926535 * 0.01
-thetaend = 3.1415926535 * 0.001
-pop_mutation_rate_init = 1/(popsize + 1)
-pop_mutation_rate_end = 1/(popsize + 1)
-mutation_rate_init = 1/(Genome + 1)
-mutation_rate_end = 1/(Genome + 1)
-mutation_flag = FALSE
-eval_fitness = TravellerSalesman
-eval_func_inputs = distance
+# popsize = 20
+# generation_max = 1000
+# nvalues_sol = nrow(cities)
+# Genome = nrow(cities)
+# thetainit = 3.1415926535 * 0.01
+# thetaend = 3.1415926535 * 0.001
+# pop_mutation_rate_init = 1/(popsize + 1)
+# pop_mutation_rate_end = 1/(popsize + 1)
+# mutation_rate_init = 1/(Genome + 1)
+# mutation_rate_end = 1/(Genome + 1)
+# mutation_flag = FALSE
+# eval_fitness = TravellerSalesman
+# eval_func_inputs = distance
 
 #----------------------
 # Perform optimization
-solutionQGA <- QGA(popsize,
-                generation_max,
-                nvalues_sol,
-                Genome,
-                thetainit,
-                thetaend,
-                pop_mutation_rate_init,
-                pop_mutation_rate_end,
-                mutation_rate_init,
-                mutation_rate_end,
-                mutation_flag,
+solutionQGA <- QGA(popsize = 20,
+                generation_max = 1000,
+                nvalues_sol = nrow(cities),
+                Genome = nrow(cities),
+                thetainit = 3.1415926535 * 0.01,
+                thetaend = 3.1415926535 * 0.01,
+                pop_mutation_rate_init = 1/(popsize + 1),
+                pop_mutation_rate_end = 1/(popsize + 1),
+                mutation_rate_init = 1/(Genome + 1),
+                mutation_rate_end = 1/(Genome + 1),
+                mutation_flag = FALSE,
                 plotting = FALSE,
                 verbose = FALSE,
-                eval_fitness,
-                eval_func_inputs)
+                eval_fitness = TravellerSalesman,
+                eval_func_inputs = distance)
 
 #----------------------
 # Analyze results
