@@ -35,42 +35,27 @@ sum(items$weight)
 maxweight = sum(items$weight) / 2
 maxweight
 
-#----------------------
-# Set parameters
-popsize = 20
-generation_max = 250
-nvalues_sol = 2
-Genome = nrow(items)
-thetainit = 3.1415926535 * 0.05
-thetaend = 3.1415926535 * 0.001
-pop_mutation_rate_init = 1/(popsize + 1)
-pop_mutation_rate_end = 1/(popsize + 1)
-mutation_rate_init = 1/(Genome + 1)
-mutation_rate_end = 1/(Genome + 1)
-mutation_flag = TRUE
-eval_fitness = KnapsackProblem
-eval_func_inputs = list(items,
-                        maxweight)
-plotting = TRUE
-verbose = FALSE
 
 #----------------------
 # Perform optimization
-solution <- QGA(popsize,
-                generation_max,
-                nvalues_sol,
-                Genome,
-                thetainit,
-                thetaend,
-                pop_mutation_rate_init,
-                pop_mutation_rate_end,
-                mutation_rate_init,
-                mutation_rate_end,
-                mutation_flag,
-                plotting,
-                verbose,
-                eval_fitness,
-                eval_func_inputs)
+solution <- QGA(popsize = 20,
+                generation_max = 500,
+                nvalues_sol = 2,
+                Genome = nrow(items),
+                thetainit = 3.1415926535 * 0.05,
+                thetaend = 3.1415926535 * 0.025,
+                pop_mutation_rate_init = 1/(popsize + 1),
+                pop_mutation_rate_end = 1/(popsize + 1),
+                # mutation_rate_init = 1/(Genome + 1),
+                # mutation_rate_end = 1/(Genome + 1),
+                mutation_rate_init = 1,
+                mutation_rate_end = 1,
+                mutation_flag = TRUE,
+                plotting = FALSE,
+                verbose = FALSE,
+                eval_fitness = KnapsackProblem,
+                eval_func_inputs = list(items,
+                                        maxweight))
 
 #----------------------
 # Analyze results
