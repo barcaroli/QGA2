@@ -1,4 +1,5 @@
-repair <- function(chromosome,
+repair <- function(popsize,
+                   chromosome,
                    geneLength,
                    genomeLength,
                    nvalues_sol,
