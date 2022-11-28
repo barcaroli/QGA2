@@ -24,7 +24,7 @@ TravellerSalesman <- function(solution,distance) {
 #-------------------------------------------------
 # Prepare data for fitness evaluation
 cities <- read.csv("cities.csv")
-ncities <- 8
+ncities <- 9
 cities <- cities[c(1:ncities),]
 distance <- as.matrix(dist(cities[,c(2:3)]))
 #----------------------
@@ -33,6 +33,7 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 # Perform optimization
 popsize = 20
 Genome = nrow(cities)
+set.seed(4321)
 solutionQGA <- QGA(
                 popsize,
                 generation_max = 1000,
