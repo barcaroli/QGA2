@@ -46,10 +46,13 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 
 #----------------------
 # Perform optimization
-solutionQGA <- QGA(popsize = 20,
+popsize = 20
+Genome = nrow(cities)
+solutionQGA <- QGA(
+                popsize,
                 generation_max = 1000,
                 nvalues_sol = nrow(cities),
-                Genome = nrow(cities),
+                Genome,
                 thetainit = 3.1415926535 * 0.01,
                 thetaend = 3.1415926535 * 0.01,
                 pop_mutation_rate_init = 1/(popsize + 1),
@@ -57,7 +60,7 @@ solutionQGA <- QGA(popsize = 20,
                 mutation_rate_init = 1/(Genome + 1),
                 mutation_rate_end = 1/(Genome + 1),
                 mutation_flag = FALSE,
-                plotting = FALSE,
+                plotting = TRUE,
                 verbose = FALSE,
                 eval_fitness = TravellerSalesman,
                 eval_func_inputs = distance)

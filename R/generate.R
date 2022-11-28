@@ -1,3 +1,23 @@
+#' generate_pop
+#'
+#' @description 
+#' 
+#' Function to initialize first population
+#' 
+#' @param popsize the number of generated solutions (population) to be evaluated at each iteration
+#' (default is 20)
+#' @param genomeLength the length of the genome (or chromosome), representing a possible solution 
+#' @param q_alphabeta the array containing the values of the amplitudes of the qubits
+#' @param rot the rotation array
+#' @param theta the rotation angle 
+#' @param h the hadamard gate 
+#' to each individual in the population (default is 1/(popsize+1))
+#' @param qubit_0 the array of qubit 0
+#' 
+#' @export
+#' 
+#' @return A numeric vector giving the best solution obtained by the QGA
+
 #---------------------------
 # POPULATION INITIALIZATION                     
 #---------------------------

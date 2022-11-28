@@ -10,12 +10,12 @@ plot_Output <- function(res) {
     ymin = y1*0.8
     ymax = y2*1.2
   }
-  if (y1 < 0 & y2 < 0) {
-    ymin = -y1*1.2
-    ymax = -y2*0.8
+  if (y1 <= 0 & y2 <= 0) {
+    ymin = y1*1.2
+    ymax = y2*0.8
   }   
   
-  if (y1 < 0 & y2 > 0) {
+  if (y1 <= 0 & y2 >= 0) {
     ymin = y1*1.2
     ymax = y2*1.2
   }
