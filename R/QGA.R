@@ -107,6 +107,7 @@ QGA <- function(popsize = 20,
                 mutation_flag = TRUE,
                 plotting = TRUE,
                 verbose = TRUE,
+                progress= TRUE,
                 eval_fitness,
                 eval_func_inputs) {
   # check
@@ -202,9 +203,9 @@ QGA <- function(popsize = 20,
   if (plotting == TRUE) plot_Output(res[c(1:generation), ])
   if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_max)
   
-  if (verbose == FALSE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
+  if (progress == TRUE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
   while (generation <= generation_max) {
-    if (verbose == FALSE) setTxtProgressBar(pb, generation)
+    if (progress == TRUE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation
     # switch_theta = generation_max * 0.25
