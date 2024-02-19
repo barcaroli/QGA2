@@ -41,11 +41,11 @@ maxweight
 popsize = 20
 Genome = nrow(items)
 solution <- QGA(popsize = 20,
-                generation_max = 500,
+                generation_max = 1000,
                 nvalues_sol = 2,
                 Genome = nrow(items),
                 thetainit = 3.1415926535 * 0.05,
-                thetaend = 3.1415926535 * 0.025,
+                thetaend = 3.1415926535 * 0.05,
                 pop_mutation_rate_init = 1/(popsize + 1),
                 pop_mutation_rate_end = 1/(popsize + 1),
                 mutation_rate_init = 1,

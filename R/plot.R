@@ -25,9 +25,6 @@ plot_Output <- function(res) {
        ylim = (c(ymin, ymax)), ylab = "Fitness", xlab="Iteration"
   )
   title("QGA - Optimization")
-  points(fitness_best ~ generation, type = "l", data = res, col = "black")
-  legend("bottomright",
-         legend = c("Best fitness: BLACK", "Average fitness: RED"),
-         ncol = 1, cex = 0.8, text.font = 1
-  )
+  points(fitness_best ~ generation, type = "l", data = res, col = "blue")
+  legend("bottomright", c("Average fitness","Best fitness"), fill = c("red", "blue"), cex=0.8)
 }  
