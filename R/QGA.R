@@ -271,7 +271,7 @@ QGA <- function(popsize = 20,
     if (plotting == TRUE) plot_Output(res[c(1:generation), ])
     if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_best)
   }
-  if (verbose == FALSE) close(pb)
+  if (progress = TRUE) close(pb)
   cat("\n *** Best fitness: ",fitness_best)
   plot_Output(res)
   solution1 <- array(solution_best,c(geneLength,Genome))
