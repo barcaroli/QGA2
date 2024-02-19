@@ -33,6 +33,7 @@
 #' @param mutation_flag flag indicating if the mutation gate is to be applied or not (default is TRUE)
 #' @param plotting flag indicating plotting during iterations
 #' @param verbose flag indicating printing fitness during iterations
+#' @param progress flag indicating progress bar during iterations
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
 #' @param eval_func_inputs specific inputs required by the eval_fitness function
 #' 
@@ -83,6 +84,7 @@
 #'                 mutation_flag = TRUE,
 #'                 plotting = TRUE,
 #'                 verbose = FALSE,
+#'                 progress = TRUE,
 #'                 eval_fitness = KnapsackProblem,
 #'                 eval_func_inputs = list(items,
 #'                                         maxweight))
