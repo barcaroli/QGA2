@@ -8,9 +8,9 @@ library(QGA)
 #----------------------
 
 #-------------------------------------------------
-# Fitness evaluation for Traveler Salesman Problem
+# Fitness evaluation for Travelling Salesman Problem
 #-------------------------------------------------
-TravellerSalesman <- function(solution,distance) {
+TravellingSalesman <- function(solution,distance) {
   l = 0.0  
   for (i in 2:length(solution)) {
     l = l+distance[solution[i-1], solution[i]]
@@ -33,11 +33,12 @@ distance <- as.matrix(dist(cities[,c(2:3)]))
 # Perform optimization
 popsize = 20
 Genome = nrow(cities)
+nvalues_sol = nrow(cities)
 set.seed(4321)
 solutionQGA <- QGA(
                 popsize,
                 generation_max = 1000,
-                nvalues_sol = nrow(cities),
+                nvalues_sol,
                 Genome,
                 thetainit = 3.1415926535 * 0.01,
                 thetaend = 3.1415926535 * 0.01,
@@ -46,9 +47,9 @@ solutionQGA <- QGA(
                 # mutation_rate_init = 1/(Genome + 1),
                 # mutation_rate_end = 1/(Genome + 1),
                 mutation_flag = FALSE,
-                plotting = FALSE,
+                plotting = TRUE,
                 verbose = FALSE,
-                eval_fitness = TravellerSalesman,
+                eval_fitness = TravellingSalesman,
                 eval_func_inputs = distance)
 
 #----------------------
