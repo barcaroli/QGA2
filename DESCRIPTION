@@ -9,7 +9,7 @@ Authors@R: c(person("Giulio", "Barcaroli", role = c("aut", "cre"),
               person("Marco", "Ballin", role = "aut",
                      email = "marco.ballin@istat.it"))
 Maintainer: Giulio Barcaroli <gbarcaroli@gmail.com>
-Description: 
+Description: This package allows the application of the Quantum Genetic Algorithm that was first proposed by Han and Kim in 2000. In this package, each optimization problem is represented as a maximization one, where each solution is a sequence of (qu)bits. Following the quantum paradigm, these qubits are in a superposition state: when measuring them, they collapse in a 0 or 1 state. After measurement, the fitness of the solution is calculated as in usual genetic algorithms. The evolution at each iteration is oriented by the application of two quantum gates to the amplitudes of the qubits: (1) a rotation gate (always); (2) a Pauli-X gate (optionally). The rotation is based on the theta angle values: higher values allow a quicker evolution, and lower values avoid local maxima. The Pauli-X gate is equivalent to the classical mutation operator and determines the swap between alfa and beta amplitudes of a given qubit. The package has been developed in such a way as to permit a complete separation between the “engine”, and the particular problem subject to combinatorial optimization. 
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: yes
@@ -18,4 +18,4 @@ Suggests:
 NeedsCompilation: no
 Packaged: 
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2

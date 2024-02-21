@@ -71,7 +71,7 @@
 #' # Perform optimization
 #' popsize = 20
 #' Genome = nrow(items)
-#' solution <- QGA(popsize = 20,
+#' solutionQGA <- QGA(popsize = 20,
 #'                 generation_max = 500,
 #'                 nvalues_sol = 2,
 #'                 Genome = nrow(items),
@@ -90,6 +90,7 @@
 #'                                         maxweight))
 #' #----------------------
 #' # Analyze results
+#' solution <- solutionQGA[[1]]
 #' solution <- solution - 1
 #' sum(solution)
 #' sum(items$weight[solution])

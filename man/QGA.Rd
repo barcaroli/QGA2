@@ -18,6 +18,7 @@ QGA(
   mutation_flag = TRUE,
   plotting = TRUE,
   verbose = TRUE,
+  progress = TRUE,
   eval_fitness,
   eval_func_inputs
 )
@@ -58,6 +59,8 @@ to each element of the chromosome (default is 1/(Genome+1))}
 \item{plotting}{flag indicating plotting during iterations}
 
 \item{verbose}{flag indicating printing fitness during iterations}
+
+\item{progress}{flag indicating progress bar during iterations}
 
 \item{eval_fitness}{name of the function that will be used to evaluate the fitness of each solution}
 
@@ -104,7 +107,7 @@ maxweight
 # Perform optimization
 popsize = 20
 Genome = nrow(items)
-solution <- QGA(popsize = 20,
+solutionQGA <- QGA(popsize = 20,
                 generation_max = 500,
                 nvalues_sol = 2,
                 Genome = nrow(items),
@@ -117,11 +120,13 @@ solution <- QGA(popsize = 20,
                 mutation_flag = TRUE,
                 plotting = TRUE,
                 verbose = FALSE,
+                progress = TRUE,
                 eval_fitness = KnapsackProblem,
                 eval_func_inputs = list(items,
                                         maxweight))
 #----------------------
 # Analyze results
+solution <- solutionQGA[[1]]
 solution <- solution - 1
 sum(solution)
 sum(items$weight[solution])
