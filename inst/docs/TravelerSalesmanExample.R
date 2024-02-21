@@ -54,8 +54,9 @@ solutionQGA <- QGA(
 
 #----------------------
 # Analyze results
-cities$city[solutionQGA]
-cities_tsp <- cities[solutionQGA,]
+solution <- solutionQGA[[1]]
+cities$city[solution]
+cities_tsp <- cities[solution,]
 plot(y~x,data=cities_tsp)
 polygon(cities_tsp$x,cities_tsp$y,border="red")
 text(x = cities_tsp$x, y = cities_tsp$y, labels = cities_tsp$city, cex=.75)

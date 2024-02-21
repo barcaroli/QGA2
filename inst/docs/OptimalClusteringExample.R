@@ -63,16 +63,18 @@ solutionQGA <- QGA(popsize,
                 eval_func_inputs = list(iris, vars))
 #----------------------
 # Analyze results
-table(solutionQGA)
+solution <- solutionQGA[[1]]
+table(solution)
 fitness <- 0
+df <- iris
 for (v in vars) {
-  cv <- tapply(df[,v],solutionQGA,FUN=sd) / tapply(df[,v],solutionQGA,FUN=mean)
+  cv <- tapply(df[,v],solution,FUN=sd) / tapply(df[,v],solution,FUN=mean)
   cv <- ifelse(is.na(cv),maxvalue,cv)
   fitness <- fitness + sum(cv)
 }
 fitness
 # [1] 1.624756
-iris$stratum <- solutionQGA
+iris$stratum <- solution
 table(iris$Species, iris$stratum)
 #             1  2  3
 # setosa      0  0 50
