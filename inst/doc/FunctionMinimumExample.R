@@ -9,7 +9,8 @@ library(QGA)
 
 #----------------------
 # Fitness evaluation
-evaluate1 <- function(solution,y) {
+evaluate1 <- function(solution,eval_func_inputs) {
+  y <- eval_func_inputs
   value <- y[solution]
   return(-value)
 }
@@ -30,8 +31,6 @@ y[which(y[x]==min(y))]
 #----------------------
 # Set parameters
 popsize = 20
-generation_max = 20
-nvalues_sol = vals
 Genome = 1
 thetainit = 3.1415926535 * 0.05
 thetaend = 3.1415926535 * 0.001
@@ -39,32 +38,31 @@ pop_mutation_rate_init = 1/(popsize + 1)
 pop_mutation_rate_end = 1/(popsize + 1)
 mutation_rate_init = 1/(Genome + 1)
 mutation_rate_end = 1/(Genome + 1)
-mutation_flag = TRUE
-eval_fitness = evaluate1
-eval_func_inputs = y
-plotting = TRUE
-verbose = TRUE
 
 #----------------------
 # Perform optimization
-solution <- QGA(popsize,
-                generation_max,
-                nvalues_sol,
-                Genome,
+set.seed(1234)
+solution <- QGA(popsize=20,
+                generation_max=20,
+                nvalues_sol=64,
+                Genome=1,
                 thetainit,
                 thetaend,
                 pop_mutation_rate_init,
                 pop_mutation_rate_end,
                 mutation_rate_init,
                 mutation_rate_end,
-                mutation_flag,
-                plotting,
-                verbose,
-                eval_fitness,
-                eval_func_inputs)
+                mutation_flag=FALSE,
+                plotting=TRUE,
+                verbose=FALSE,
+                progress=FALSE,
+                eval_fitness=evaluate1,
+                eval_func_inputs=y)
+QGA:::plot_Output(solution[[2]])
 
 #----------------------
 # Analyze results
+solution <- solution[[1]]
 solution
 y[solution]
 which(y[x]==min(y))
