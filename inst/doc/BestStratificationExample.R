@@ -81,6 +81,7 @@ solutionQGA <- QGA(popsize,
                 eval_func_inputs = list(frame, cv))
 #----------------------
 # Analyze results
+solutionQGA <- solutionQGA[[1]]
 table(solutionQGA)
 strata <- aggrStrata2(dataset = frame, 
                       vett = solutionQGA, 
@@ -97,15 +98,15 @@ table(iris$Species, iris$stratum)
 #-------------------------------
 # Comparison with SamplingStrata
 set.seed(1234)
-solution_SamplingStrata <-optimStrata(method = "atomic",
+solution_SamplingStrata <- optimStrata(method = "atomic",
                   framesamp = frame,
                   nStrata = nstrat,
                   errors = cv,
                   pops = popsize,
                   minnumstr = 1,
-                  iter = 1000)
+                  iter = 2000)
 sum(solution_SamplingStrata$aggr_strata$SOLUZ)
-# [1] 21.71959
+# [1] 19.75488
 iris$stratum <- solution_SamplingStrata$framenew$LABEL
 table(iris$Species, iris$stratum)
 #             1  2  3
@@ -127,7 +128,7 @@ evaluate <- function(solution) {
 solution_genalg <- rbga(stringMin=c(rep(1,nrow(iris))), 
                    stringMax=c(rep(nstrat,nrow(iris))),
                    popSize=20, 
-                   iters=1000, 
+                   iters=2000, 
                    elitism=NA, 
                    evalFunc=evaluate)
 plot(solution_genalg)
@@ -144,11 +145,11 @@ strata <- aggrStrata2(dataset = frame,
                       vett = bestSolution, 
                       dominio = 1)
 sum(bethel(strata, cv, realAllocation = TRUE))
-# [1] 22.39341
+# [1] 19.75488
 iris$stratum <- bestSolution
 table(iris$Species, iris$stratum)
 #             1  2  3
-# setosa      0  0 50
-# versicolor  0 50  0
-# virginica  34 16  0
+# setosa      0 50  0
+# versicolor 48  0  2
+# virginica   4  0 46
 save.image("run_best_stratification.RData")
