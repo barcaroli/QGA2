@@ -210,7 +210,9 @@ QGA <- function(popsize = 20,
   
   if (progress == TRUE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
   if (is.null(stop_limit)) stop_limit <- Inf
+  iter <- 0
   while (generation <= generation_max & stop_limit > fitness_max) {
+    iter <- iter + 1
     if (progress == TRUE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation
@@ -277,7 +279,7 @@ QGA <- function(popsize = 20,
   }
   if (progress == TRUE) close(pb)
   cat("\n *** Best fitness: ",fitness_best)
-  plot_Output(res)
+  plot_Output(res[c(1:iter), ])
   solution1 <- array(solution_best,c(geneLength,Genome))
   solution <- c(rep(0,Genome))
   for (x in c(1:Genome)) {
