@@ -36,6 +36,7 @@
 #' @param progress flag indicating progress bar during iterations
 #' @param eval_fitness name of the function that will be used to evaluate the fitness of each solution
 #' @param eval_func_inputs specific inputs required by the eval_fitness function
+#' @param stop_limit value to stop the iterations if the fitness is higher
 #' 
 #' @export
 #' 
@@ -110,9 +111,10 @@ QGA <- function(popsize = 20,
                 mutation_flag = TRUE,
                 plotting = TRUE,
                 verbose = TRUE,
-                progress= TRUE,
+                progress = TRUE,
                 eval_fitness,
-                eval_func_inputs) {
+                eval_func_inputs,
+                stop_limit = NULL) {
   # check
   if (is.null(nvalues_sol)) stop("nvalues_sol parameter value missing!")
   if (is.null(Genome)) stop("Genome parameter value missing!")
@@ -207,7 +209,8 @@ QGA <- function(popsize = 20,
   if (verbose == TRUE) cat("\n", generation, ",", fitness_average, ",", fitness_max)
   
   if (progress == TRUE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
-  while (generation <= generation_max) {
+  if (is.null(stop_limit)) stop_limit <- Inf
+  while (generation <= generation_max & stop_limit > fitness) {
     if (progress == TRUE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation

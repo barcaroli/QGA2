@@ -20,7 +20,8 @@ QGA(
   verbose = TRUE,
   progress = TRUE,
   eval_fitness,
-  eval_func_inputs
+  eval_func_inputs,
+  stop_limit = NULL
 )
 }
 \arguments{
@@ -65,6 +66,8 @@ to each element of the chromosome (default is 1/(Genome+1))}
 \item{eval_fitness}{name of the function that will be used to evaluate the fitness of each solution}
 
 \item{eval_func_inputs}{specific inputs required by the eval_fitness function}
+
+\item{stop_limit}{value to stop the iterations if the fitness is higher}
 }
 \value{
 A numeric vector (positive integers) giving the best solution obtained by the QGA

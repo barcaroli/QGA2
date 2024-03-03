@@ -2,7 +2,7 @@ Package: QGA
 Type: Package
 Title: Quantum Genetic Algorithm
 Version: 0.1
-Date: 2022-11-11
+Date: 2024-03-03
 Author: Giulio Barcaroli, Marco Ballin
 Authors@R: c(person("Giulio", "Barcaroli", role = c("aut", "cre"),
                      email = "gbarcaroli@gmail.com"),
@@ -18,4 +18,4 @@ Suggests:
 NeedsCompilation: no
 Packaged: 
 VignetteBuilder: knitr
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
