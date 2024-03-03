@@ -210,7 +210,7 @@ QGA <- function(popsize = 20,
   
   if (progress == TRUE) pb <- txtProgressBar(min = 0, max = generation_max, style = 3)
   if (is.null(stop_limit)) stop_limit <- Inf
-  while (generation <= generation_max & stop_limit > fitness) {
+  while (generation <= generation_max && stop_limit > fitness) {
     if (progress == TRUE) setTxtProgressBar(pb, generation)
     # cat("\n Iteration: ",generation)
     theta <- thetainit - ((thetainit - thetaend) / generation_max) * generation

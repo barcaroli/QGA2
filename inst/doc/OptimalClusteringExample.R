@@ -132,4 +132,3 @@ table(iris$Species, iris$stratum)
 # setosa      0 50  0
 # versicolor  9  0 41
 # virginica  41  0  9
-
