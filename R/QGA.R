@@ -288,6 +288,6 @@ QGA <- function(popsize = 20,
     }
   }
   solution <- solution + 1
-  out <- list(solution,res)
+  out <- list(solution,res[c(1:iter), ])
   return(out)
 }
