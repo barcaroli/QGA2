@@ -11,7 +11,7 @@
 
 <meta name="author" content="Giulio Barcaroli" />
 
-<meta name="date" content="2024-02-21" />
+<meta name="date" content="2024-03-04" />
 
 <title>Quantum Genetic Algorithm (QGA)</title>
 
@@ -1591,7 +1591,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Quantum Genetic Algorithm (QGA)</h1>
 <h4 class="author">Giulio Barcaroli</h4>
-<h4 class="date">2024-02-21</h4>
+<h4 class="date">2024-03-04</h4>
 
 </div>
 
@@ -1599,6 +1599,7 @@ font-size: 0.95em;
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <p>This package implements the Quantum Genetic Algorithm that was first proposed by <span class="citation">Han and Kim (2000)</span>. A complete illustration of the class of quantum genetic algorithms is in <span class="citation">Zhang (2011)</span>. Another very useful review is contained in <span class="citation">Nowotniak (2010)</span>.</p>
+<p>This R implementation takes ideas from the Python implementation by <span class="citation">Lahoz-Beltra (2008)</span>.</p>
 <p>In this package, each optimization problem is represented as a maximization one, where each solution is a sequence of (qu)bits. Following the quantum paradigm, these qubits are in a superposition state: when measuring them, they collapse in a 0 or 1 state. After measurement, the fitness of the solution is calculated as in usual genetic algorithms.</p>
 <p>The evolution at each iteration is oriented by the application of two quantum gates to the amplitudes of the qubits:</p>
 <ul>
@@ -1874,7 +1875,7 @@ Moreover, we want to iterate 1000 times, each time considering 20 generated solu
 <span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>                <span class="co"># mutation_rate_init = 1/(Genome + 1),</span></span>
 <span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>                <span class="co"># mutation_rate_end = 1/(Genome + 1),</span></span>
 <span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>                <span class="at">mutation_flag =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>                <span class="at">plotting =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>                <span class="at">plotting =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>                <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>                <span class="at">eval_fitness =</span> TravellingSalesman,</span>
@@ -1956,7 +1957,7 @@ This means that each solution is a vector of 150 elements, each one with an assi
 <span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>                <span class="at">mutation_rate_init =</span> <span class="dv">1</span><span class="sc">/</span>(Genome <span class="sc">+</span> <span class="dv">1</span>),</span>
 <span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>                <span class="at">mutation_rate_end =</span> <span class="dv">1</span><span class="sc">/</span>(Genome <span class="sc">+</span> <span class="dv">1</span>),</span>
 <span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>                <span class="at">mutation_flag =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>                <span class="at">plotting =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>                <span class="at">plotting =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>                <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a>                <span class="at">eval_fitness =</span> clustering,</span>
@@ -1990,8 +1991,11 @@ This means that each solution is a vector of 150 elements, each one with an assi
 <div id="ref-Han2000" class="csl-entry">
 Han, Kuk-Hyun, and Jong-Hwan Kim. 2000. <span>“Genetic Quantum Algorithm and Its Application to Combinatorial Optimization Problem.”</span> <em>Proceedings of the 2000 Congress on Evolutionary Computation</em> 2: 1354–60. <a href="https://doi.org/10.1109/CEC.2000.870809">https://doi.org/10.1109/CEC.2000.870809</a>.
 </div>
+<div id="ref-Lahoz-Beltra2008" class="csl-entry">
+Lahoz-Beltra, Rafael. 2008. <span>“QuantumGeneticAlgorithms.”</span> <em>GitHub Repository</em>. <a href="https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms" class="uri">https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms</a>.
+</div>
 <div id="ref-Nowotniak2010" class="csl-entry">
-Nowotniak, Robert. 2010. <span>“Survey of Quantum-Inspired Evolutionary Algorithms.”</span> <em>Technical University of Łódź, Computer Engineering Department</em>.
+Nowotniak, Robert. 2010. <span>“Survey of Quantum-Inspired Evolutionary Algorithms.”</span> <em>Technical University of Łódź, Computer Engineering Department</em>. <a href="https://robert.nowotniak.com/papers/survey2010fimb.pdf">https://robert.nowotniak.com/papers/survey2010fimb.pdf</a>.
 </div>
 <div id="ref-Zhang2011" class="csl-entry">
 Zhang, Gexiang. 2011. <span>“Quantum-Inspired Evolutionary Algorithms: A Survey and Empirical Study.”</span> <em>Journal of Heuristics</em> 17: 303–51. <a href="https://doi.org/10.1007/s10732-010-9136-0">https://doi.org/10.1007/s10732-010-9136-0</a>.

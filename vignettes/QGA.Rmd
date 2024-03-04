@@ -37,6 +37,8 @@ library(QGA)
 
 This package implements the Quantum Genetic Algorithm that was first proposed by @Han2000. A complete illustration of the class of quantum genetic algorithms is in @Zhang2011. Another very useful review is contained in @Nowotniak2010.
 
+This R implementation  takes ideas from the Python implementation by @Lahoz-Beltra2008.
+
 In this package, each optimization problem is represented as a maximization one, where each solution is a sequence of (qu)bits. Following the quantum paradigm, these qubits are in a superposition state: when measuring them, they collapse in a 0 or 1 state. After measurement, the fitness of the solution is calculated as in usual genetic algorithms.
 
 The evolution at each iteration is oriented by the application of two quantum gates to the amplitudes of the qubits:
