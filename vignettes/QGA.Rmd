@@ -35,7 +35,7 @@ library(QGA)
 
 # Introduction
 
-This package implements the Quantum Genetic Algorithm that was first proposed by @Han2000. A complete illustration of the class of quantum genetic algorithms is in @Zhang2011. Another very useful review is contained in @Nowotniak2010.
+This package implements the Quantum Genetic Algorithm that was first proposed by @Han2000. A complete illustration of the class of quantum genetic algorithms is in @Zhang2011. Other useful reviews are contained in @Nowotniak2010 and in by @Lahoz2016.
 
 This R implementation  takes ideas from the Python implementation by @Lahoz-Beltra2008.
 

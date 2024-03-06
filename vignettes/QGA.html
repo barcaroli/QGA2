@@ -11,7 +11,7 @@
 
 <meta name="author" content="Giulio Barcaroli" />
 
-<meta name="date" content="2024-03-04" />
+<meta name="date" content="2024-03-06" />
 
 <title>Quantum Genetic Algorithm (QGA)</title>
 
@@ -1591,14 +1591,14 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Quantum Genetic Algorithm (QGA)</h1>
 <h4 class="author">Giulio Barcaroli</h4>
-<h4 class="date">2024-03-04</h4>
+<h4 class="date">2024-03-06</h4>
 
 </div>
 
 
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This package implements the Quantum Genetic Algorithm that was first proposed by <span class="citation">Han and Kim (2000)</span>. A complete illustration of the class of quantum genetic algorithms is in <span class="citation">Zhang (2011)</span>. Another very useful review is contained in <span class="citation">Nowotniak (2010)</span>.</p>
+<p>This package implements the Quantum Genetic Algorithm that was first proposed by <span class="citation">Han and Kim (2000)</span>. A complete illustration of the class of quantum genetic algorithms is in <span class="citation">Zhang (2011)</span>. Other useful reviews are contained in <span class="citation">Nowotniak (2010)</span> and in by <span class="citation">Lahoz-Beltra (2016)</span>.</p>
 <p>This R implementation takes ideas from the Python implementation by <span class="citation">Lahoz-Beltra (2008)</span>.</p>
 <p>In this package, each optimization problem is represented as a maximization one, where each solution is a sequence of (qu)bits. Following the quantum paradigm, these qubits are in a superposition state: when measuring them, they collapse in a 0 or 1 state. After measurement, the fitness of the solution is calculated as in usual genetic algorithms.</p>
 <p>The evolution at each iteration is oriented by the application of two quantum gates to the amplitudes of the qubits:</p>
@@ -1993,6 +1993,9 @@ Han, Kuk-Hyun, and Jong-Hwan Kim. 2000. <span>“Genetic Quantum Algorithm and I
 </div>
 <div id="ref-Lahoz-Beltra2008" class="csl-entry">
 Lahoz-Beltra, Rafael. 2008. <span>“QuantumGeneticAlgorithms.”</span> <em>GitHub Repository</em>. <a href="https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms" class="uri">https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms</a>.
+</div>
+<div id="ref-Lahoz2016" class="csl-entry">
+———. 2016. <span>“Quantum Genetic Algorithms for Computer Scientists.”</span> <em>Computers</em> 5(4). <a href="https://doi.org/10.3390/computers5040024">https://doi.org/10.3390/computers5040024</a>.
 </div>
 <div id="ref-Nowotniak2010" class="csl-entry">
 Nowotniak, Robert. 2010. <span>“Survey of Quantum-Inspired Evolutionary Algorithms.”</span> <em>Technical University of Łódź, Computer Engineering Department</em>. <a href="https://robert.nowotniak.com/papers/survey2010fimb.pdf">https://robert.nowotniak.com/papers/survey2010fimb.pdf</a>.
