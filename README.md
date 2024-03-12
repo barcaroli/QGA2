@@ -4,12 +4,15 @@
 This package allows the application of the Quantum Genetic Algorithm
 that was first proposed by Han and Kim in 2000.
 
-In this package, each optimization problem is represented as a
-maximization one, where each solution is a sequence of (qu)bits.
-Following the quantum paradigm, these qubits are in a superposition
-state: when measuring them, they collapse in a 0 or 1 state. After
-measurement, the fitness of the solution is calculated as in usual
-genetic algorithms.
+This R development is a derivation of the Python implementation by
+Lahoz-Beltra
+(<https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms>).
+
+Each optimization problem is represented as a maximization one, where
+each solution is a sequence of (qu)bits. Following the quantum paradigm,
+these qubits are in a superposition state: when measuring them, they
+collapse in a 0 or 1 state. After measurement, the fitness of the
+solution is calculated as in usual genetic algorithms.
 
 The evolution at each iteration is oriented by the application of two
 quantum gates to the amplitudes of the qubits:
@@ -59,9 +62,24 @@ In the other cases, QGA is compared with the GA implemented in the
 the knapsack problem, while the opposite is in the case of the traveler
 salesman.
 
-## Reference
+## References
 
 Kuk-Hyun Han and Jong-Hwan Kim, “Genetic quantum algorithm and its
 application to combinatorial optimization problem,” Proceedings of the
 2000 Congress on Evolutionary Computation. CEC00 (Cat. No.00TH8512),
 2000, pp.1354-1360 vol.2, doi: 10.1109/CEC.2000.870809.
+
+Lahoz-Beltra, Rafael. 2008. “QuantumGeneticAlgorithms.” GitHub
+Repository.
+<https://github.com/ResearchCodesHub/QuantumGeneticAlgorithms>.
+
+Lahoz-Beltra, Rafael. 2016. “Quantum Genetic Algorithms for Computer
+Scientists.” Computers 5(4). <https://doi.org/10.3390/computers5040024>.
+
+Nowotniak, Robert. 2010. “Survey of Quantum-Inspired Evolutionary
+Algorithms.” Technical University of Łódź, Computer Engineering
+Department. <https://robert.nowotniak.com/papers/survey2010fimb.pdf>.
+
+Zhang, Gexiang. 2011. “Quantum-Inspired Evolutionary Algorithms: A
+Survey and Empirical Study.” Journal of Heuristics 17: 303–51.
+<https://doi.org/10.1007/s10732-010-9136-0>
