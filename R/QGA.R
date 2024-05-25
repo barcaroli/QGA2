@@ -85,7 +85,7 @@
 #'                 mutation_flag = TRUE,
 #'                 plotting = FALSE,
 #'                 verbose = FALSE,
-#'                 progress = TRUE,
+#'                 progress = FALSE,
 #'                 eval_fitness = KnapsackProblem,
 #'                 eval_func_inputs = list(items,
 #'                                         maxweight))
