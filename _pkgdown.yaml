@@ -1,0 +1,11 @@
+destination: docs
+title: QGA
+description: Quantum Genetic Algorithm
+author: Giulio Barcaroli
+url: https://github.com/barcaroli/QGA
+template:
+  params:
+    bootswatch: Italy
+    
+
+
