@@ -3,5 +3,4 @@ title: QGA
 description: Quantum Genetic Algorithm
 url: https://github.com/barcaroli/QGA
 author: Giulio Barcaroli
-plugins:
-  - jekyll-seo-tag
+
