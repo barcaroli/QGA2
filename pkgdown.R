@@ -15,10 +15,10 @@
 setwd("D:\\Google Drive\\Genetic Algorithm\\QGA")
 
 library(pkgdown)
-# usethis::use_pkgdown()
+usethis::use_pkgdown()
 # build_favicon(pkg = ".")
 # init_site(pkg = ".")
-build_site()
+devtools::build_site()
 
 
 
