@@ -81,6 +81,7 @@ the function for the evaluation of the fitness that is specific for the particul
 problem to be optmized.
 }
 \examples{
+\dontrun{
 #----------------------------------------
 # Fitness evaluation for Knapsack Problem
 #----------------------------------------
@@ -134,5 +135,5 @@ solution <- solution - 1
 sum(solution)
 sum(items$weight[solution])
 maxweight
-
+}
 }
