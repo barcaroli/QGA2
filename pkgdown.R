@@ -6,8 +6,8 @@
 # # use_travis()
 # use_cran_badge()
 
-# install.packages("tvthemes") # v1.1.0
-# library(tvthemes)
+install.packages("tvthemes") # v1.1.0
+library(tvthemes)
 
 
 # devtools::install_github("hadley/pkgdown")
