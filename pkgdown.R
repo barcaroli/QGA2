@@ -18,7 +18,7 @@ library(pkgdown)
 usethis::use_pkgdown()
 # build_favicon(pkg = ".")
 # init_site(pkg = ".")
-devtools::build_site()
+pkgdown::build_site()
 
 
 
