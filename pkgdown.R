@@ -9,8 +9,8 @@
 # install.packages("tvthemes") # v1.1.0
 library(tvthemes)
 
-
-devtools::install_github("hadley/pkgdown")
+# devtools::install_version("pkgdown", version = "1.6.1")
+# devtools::install_github("hadley/pkgdown")
 # setwd("C:/Users/UTENTE/Google Drive/Genetic Algorithm/QGA")
 setwd("D:\\Google Drive\\Genetic Algorithm\\QGA")
 
