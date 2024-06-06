@@ -13,9 +13,13 @@ library(tvthemes)
 # devtools::install_github("hadley/pkgdown")
 # setwd("C:/Users/UTENTE/Google Drive/Genetic Algorithm/QGA")
 setwd("D:\\Google Drive\\Genetic Algorithm\\QGA")
-
+# 
+# library(devtools)
+# use_readme_rmd()
+# use_vignette("QGA") 
 library(pkgdown)
 usethis::use_pkgdown()
+
 # build_favicons(pkg = ".")
 init_site(pkg = ".")
 pkgdown::build_site()
