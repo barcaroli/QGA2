@@ -2,7 +2,7 @@
 output: github_document
 keep_md: TRUE
 ---
-
+ 
 # QGA (Quantum Genetic Algorithm) R package
 
 This package allows the application of the Quantum Genetic Algorithm that was first proposed by Han and Kim in 2000. 
