@@ -10,7 +10,7 @@ Lahoz-Beltra
 
 Each optimization problem is represented as a maximization one, where
 each solution is a sequence of (qu)bits. Following the quantum paradigm,
-these qubits are in a superposition state: when measuring them, they
+these (qu)bits are in a superposition state: when measuring them, they
 collapse in a 0 or 1 state. After measurement, the fitness of the
 solution is calculated as in usual genetic algorithms.
 
