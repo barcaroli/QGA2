@@ -10,7 +10,9 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0)
-Suggests: knitr
+Suggests: 
+    knitr,
+    rmarkdown
 NeedsCompilation: no
 Packaged:
 URL: https://barcaroli.github.io/QGA/, https://github.com/barcaroli/QGA/
