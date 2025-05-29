@@ -7,8 +7,8 @@
 #' @details
 #' 
 #' This function is the 'engine', which performs the quantum genetic algorithm calling
-#' the function for the evaluation of the fitness that is specific for the particulare
-#' problem to be optmized.
+#' the function for the evaluation of the fitness that is specific for the particular
+#' problem to be optimized.
 #' 
 #' @param popsize the number of generated solutions (population) to be evaluated at each iteration
 #' (default is 20)
@@ -16,10 +16,10 @@
 #' (default is 200)
 #' @param Genome the length of the genome (or chromosome), representing a possible solution 
 #' @param nvalues_sol the number of possible integer values contained in each element (gene) of the solution 
-#' @param thetainit the angle (expressed in radiants) to be used when applying the rotation gate
+#' @param thetainit the angle (expressed in radians) to be used when applying the rotation gate
 #' when starting the iterations 
 #' (default is pi * 0.05, where pi = 3.1415926535)
-#' @param thetaend the angle (expressed in radiants) to be used when applying the rotation gate 
+#' @param thetaend the angle (expressed in radians) to be used when applying the rotation gate 
 #' at the end of the iterations
 #' (default is pi * 0.025, where pi = 3.1415926535)
 #' @param pop_mutation_rate_init initial mutation rate to be used when applying the X-Pauli gate, applied 
