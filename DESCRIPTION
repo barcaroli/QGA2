@@ -11,7 +11,8 @@ Encoding: UTF-8
 LazyLoad: yes
 Depends: R (>= 3.5.0)
 Imports: 
-    doParallel
+    doParallel,
+    foreach
 Suggests: 
     knitr,
     rmarkdown
