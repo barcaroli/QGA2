@@ -1,147 +1,68 @@
 #--------------
 # ROTATION                   
 #--------------
+rotation <- function(chromosome, best_chromosome, generation, genomeLength,
+                     solution_best, q_alphabeta, work_q_alphabeta, popsize,
+                     fitness, theta) {
 
-rotation <- function(chromosome,
-                     best_chromosome,
-                     generation,
-                     genomeLength,
-                     solution_best,
-                     q_alphabeta,
-                     work_q_alphabeta,
-                     popsize,
-                     fitness, 
-                     theta) {
-  rot <- array(0, c(2, 2))
-  for (i in c(1:popsize)) {
-    if (sum(chromosome[i, ] != solution_best) != 0) {
-      for (j in c(1:genomeLength)) {
-        #----------------------
-        # Han-Kim lookup table 
-        #----------------------
-        # f(x) > f(b) FALSE
-        if (fitness[i] < fitness[best_chromosome[generation]]) {
-          # x = 0 b = 1
-          if (chromosome[i, j] == 0 & chromosome[best_chromosome[generation], j] == 1) {
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
-              s = 1
-            }
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
-              s = -1
-            }
-            if (q_alphabeta[j, 1, i] == 0) {
-              s = 0
-            }
-            if (q_alphabeta[j, 2, i] == 0) {
-              if (runif(1) < 0.5) s <- 1 else s <- -1
-            }
-            rot[1, 1] <- cos(s * theta)
-            rot[1, 2] <- -sin(s * theta)
-            rot[2, 1] <- sin(s * theta)
-            rot[2, 2] <- cos(s * theta)
-            work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
-            work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
-            q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
-            q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
+  apply_rotation <- function(q, s, theta) {
+    cs <- cos(s * theta)
+    sn <- sin(s * theta)
+    r1 <- cs * q[1] - sn * q[2]
+    r2 <- sn * q[1] + cs * q[2]
+    c(r1, r2)
+  }
+
+  for (i in seq_len(popsize)) {
+    if (any(chromosome[i, ] != solution_best)) {
+      for (j in seq_len(genomeLength)) {
+        xb <- chromosome[i, j]
+        bb <- chromosome[best_chromosome[generation], j]
+        qa <- q_alphabeta[j, , i]
+
+        # Determine if fitness[i] is better than best
+        better <- fitness[i] < fitness[best_chromosome[generation]]
+
+        # Select action
+        s <- NULL
+        if (better) {
+          if (xb == 0 && bb == 1) {
+            if (qa[1] * qa[2] >= 0) s <- 1
+            else if (qa[1] * qa[2] < 0) s <- -1
+            else if (qa[1] == 0) s <- 0
+            else if (qa[2] == 0) s <- ifelse(runif(1) < 0.5, 1, -1)
+          } else if (xb == 1 && bb == 0) {
+            if (qa[1] * qa[2] >= 0) s <- -1
+            else if (qa[1] * qa[2] < 0) s <- 1
+            else if (qa[1] == 0) s <- ifelse(runif(1) < 0.5, 1, -1)
+            else if (qa[2] == 0) s <- 0
           }
-          # x = 1 b = 0
-          if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 0) {
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
-              s = -1
-            }
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
-              s = 1
-            }
-            if (q_alphabeta[j, 1, i] == 0) {
-              if (runif(1) < 0.5) s <- 1 else s <- -1
-            }
-            if (q_alphabeta[j, 2, i] == 0) {
-              s = 0
-            }
-            rot[1, 1] <- cos(s * theta)
-            rot[1, 2] <- -sin(s * theta)
-            rot[2, 1] <- sin(s * theta)
-            rot[2, 2] <- cos(s * theta)
-            work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
-            work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
-            q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
-            q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
+        } else { # fitness[i] >= best
+          if (xb == 0 && bb == 1) {
+            if (qa[1] * qa[2] >= 0) s <- -1
+            else if (qa[1] * qa[2] < 0) s <- 1
+            else if (qa[1] == 0) s <- ifelse(runif(1) < 0.5, 1, -1)
+            else if (qa[2] == 0) s <- 0
+          } else if (xb == 0 && bb == 1) {
+            if (qa[1] * qa[2] >= 0) s <- 1
+            else if (qa[1] * qa[2] < 0) s <- -1
+            else if (qa[1] == 0) s <- 0
+            else if (qa[2] == 0) s <- ifelse(runif(1) < 0.5, 1, -1)
+          } else if (xb == 1 && bb == 1) {
+            if (qa[1] * qa[2] >= 0) s <- 1
+            else if (qa[1] * qa[2] < 0) s <- -1
+            else if (qa[1] == 0) s <- 0
+            else if (qa[2] == 0) s <- ifelse(runif(1) < 0.5, 1, -1)
           }
         }
-        # f(x) > f(b) TRUE
-        if (fitness[i] >= fitness[best_chromosome[generation]]) {
-          # x = 0 b = 1
-          if (chromosome[i, j] == 0 & chromosome[best_chromosome[generation], j] == 1) {
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
-              s = -1
-            }
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
-              s = 1
-            }
-            if (q_alphabeta[j, 1, i] == 0) {
-              if (runif(1) < 0.5) s <- 1 else s <- -1
-            }
-            if (q_alphabeta[j, 2, i] == 0) {
-              s = 0
-            }
-            rot[1, 1] <- cos(s * theta)
-            rot[1, 2] <- -sin(s * theta)
-            rot[2, 1] <- sin(s * theta)
-            rot[2, 2] <- cos(s * theta)
-            work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
-            work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
-            q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
-            q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
-          }
-          # x = 1 b = 0
-          if (chromosome[i, j] == 0 & chromosome[best_chromosome[generation], j] == 1) {
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
-              s = 1
-            }
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
-              s = -1
-            }
-            if (q_alphabeta[j, 1, i] == 0) {
-              s = 0
-            }
-            if (q_alphabeta[j, 2, i] == 0) {
-              if (runif(1) < 0.5) s <- 1 else s <- -1
-            }
-            rot[1, 1] <- cos(s * theta)
-            rot[1, 2] <- -sin(s * theta)
-            rot[2, 1] <- sin(s * theta)
-            rot[2, 2] <- cos(s * theta)
-            work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
-            work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
-            q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
-            q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
-          }
-          # x = 1 b = 1
-          if (chromosome[i, j] == 1 & chromosome[best_chromosome[generation], j] == 1) {
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] >= 0) {
-              s = 1
-            }
-            if (q_alphabeta[j, 1, i]*q_alphabeta[j, 2, i] < 0) {
-              s = -1
-            }
-            if (q_alphabeta[j, 1, i] == 0) {
-              s = 0
-            }
-            if (q_alphabeta[j, 2, i] == 0) {
-              if (runif(1) < 0.5) s <- 1 else s <- -1
-            }
-            rot[1, 1] <- cos(s * theta)
-            rot[1, 2] <- -sin(s * theta)
-            rot[2, 1] <- sin(s * theta)
-            rot[2, 2] <- cos(s * theta)
-            work_q_alphabeta[j, 1, i] <- (rot[1, 1] * q_alphabeta[j, 1, i]) + (rot[1, 2] * q_alphabeta[j, 2, i])
-            work_q_alphabeta[j, 2, i] <- (rot[2, 1] * q_alphabeta[j, 1, i]) + (rot[2, 2] * q_alphabeta[j, 2, i])
-            q_alphabeta[j, 1, i] <- work_q_alphabeta[j, 1, i]
-            q_alphabeta[j, 2, i] <- work_q_alphabeta[j, 2, i]
-          }
+
+        if (!is.null(s)) {
+          rotated <- apply_rotation(qa, s, theta)
+          q_alphabeta[j, 1, i] <- rotated[1]
+          q_alphabeta[j, 2, i] <- rotated[2]
         }
       }
     }
   }
-  return(q_alphabeta)
+  q_alphabeta
 }
