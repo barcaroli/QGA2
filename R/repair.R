@@ -1,3 +1,6 @@
+#----------
+# REPAIR                   
+#----------
 repair <- function(popsize,
                    chromosome,
                    geneLength,
