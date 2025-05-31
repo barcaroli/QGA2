@@ -1,16 +1,17 @@
 #---------------------------
 # MEASUREMENT                     
 #---------------------------
-measure <- function(popsize,
-                    genomeLength,
-                    q_alphabeta,
+measure <- function(popsize, 
+                    genomeLength, 
+                    q_alphabeta, 
                     chromosome) {
-  for (i in (1:popsize)) {
-    for (j in (1:genomeLength)) {
-      p_alpha <- runif(1)
-      if (p_alpha <= 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 0
-      if (p_alpha > 2*q_alphabeta[j, 1, i]^2) chromosome[i, j] <- 1
-    }
-  }
+  # Generate all random numbers at once
+  p_alpha <- matrix(runif(popsize * genomeLength), nrow = popsize, ncol = genomeLength)
+  # Compute the threshold matrix
+  thresh <- 2 * (q_alphabeta[, 1, ])^2
+  thresh <- t(thresh) # Adjust to [i, j] layout as in chromosome
+  # Assign 0 or 1 based on comparison
+  chromosome[p_alpha <= thresh] <- 0
+  chromosome[p_alpha > thresh] <- 1
   return(chromosome)
 }
