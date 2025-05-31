@@ -1,9 +1,13 @@
 #---------------------------
 # FROM DECIMAL TO BINARY                    
 #---------------------------  
-as.binary <- function(number, n) {
-  # Use integer division and modular arithmetic to extract bits
-  number <- as.integer(number)
-  bits <- rev(as.integer(intToBits(number))[1:n])
-  return(bits)
+as.binary <- function(number,n) {
+  bin <- rep(NA,n)
+  i = n
+  for (i in c(n:1)) {
+    digit <- number %% 2
+    number <- floor(number / 2)
+    bin[i] <- digit
+  }
+  return(bin)
 }
