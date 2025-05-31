@@ -1,24 +1,23 @@
 #---------------------------
 # POPULATION INITIALIZATION                     
 #---------------------------
-
-generate_pop <- function(popsize,
-                         genomeLength,
-                         q_alphabeta,
-                         rot,
-                         theta,
-                         h,
-                         qubit_0) {
-  for (i in c(1:popsize)) {
-    for (j in c(1:genomeLength)) {
-      theta <- runif(1) * 360
-      theta <- pi*theta
-      rot[1, 1] <- cos(theta)
-      rot[1, 2] <- -sin(theta)
-      rot[2, 1] <- sin(theta)
-      rot[2, 2] <- cos(theta)
-      q_alphabeta[j, 1, i] <- rot[1, 1] * h[1, 1] * qubit_0[1] + rot[1, 2] * h[1, 2] * qubit_0[2]
-      q_alphabeta[j, 2, i] <- rot[2, 1] * h[2, 1] * qubit_0[1] + rot[2, 2] * h[2, 2] * qubit_0[2]
+generate_pop <- function(popsize, genomeLength, q_alphabeta, rot, theta, h, qubit_0) {
+  # Pre-generate all random thetas in radians (uniformly between 0 and 2*pi)
+  thetas <- runif(popsize * genomeLength, min = 0, max = 2 * pi)
+  dim(thetas) <- c(genomeLength, popsize)
+  
+  # Precompute the qubit basis vector (length 2)
+  qubit_0 <- as.numeric(qubit_0)
+  
+  # Precompute h
+  h <- as.matrix(h)
+  
+  for (i in seq_len(popsize)) {
+    for (j in seq_len(genomeLength)) {
+      theta <- thetas[j, i]
+      rot <- matrix(c(cos(theta), -sin(theta), sin(theta), cos(theta)), nrow = 2, byrow = TRUE)
+      q_ab <- rot %*% h %*% qubit_0
+      q_alphabeta[j, , i] <- as.numeric(q_ab)
     }
   }
   return(q_alphabeta)
